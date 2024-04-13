@@ -1,21 +1,37 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import {useQuery} from "@tanstack/react-query";
 
 function App() {
   const [count, setCount] = useState(0)
-  const [hello, setHello] = useState("")
+  const [listCategories, setListCategories] = useState([])
 
   useEffect(() => {
-	  fetch("./api/hello")
-	  .then(response => response.text())
-	  .then(data => setHello(data));
+	  fetch("./api/categories")
+	  .then(response => response.json())
+	  .then(data => setListCategories(data));
   }, [])
 
+  const cat = useQuery({
+      queryKey:["categories"],
+      queryFn: () => fetch("./api/categories")
+          .then(response => response.json())
+  })
 
+    if (cat.isPending || cat.isLoading) {
+        return <div>loading</div>
+    }
+    if (cat.error) {
+        return <div>error</div>
+    }
+    
   return (
     <div className="App">
+    <ul>
+        {listCategories.map((categorie, index) => <li key={index}>{categorie.libelle}</li>)}
+        {cat.data.map((categorie, index) => <li key={index}>{categorie.libelle}</li>)}
+    </ul>
 
-      <h1>{hello}</h1>
 
     </div>
   )
