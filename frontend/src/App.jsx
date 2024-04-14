@@ -27,12 +27,11 @@ function App() {
     
   return (
     <div className="App">
+        <h1>COUCOU JE SUIS APP</h1>
     <ul>
         {listCategories.map((categorie, index) => <li key={index}>{categorie.libelle}</li>)}
         {cat.data.map((categorie, index) => <li key={index}>{categorie.libelle}</li>)}
     </ul>
-
-
     </div>
   )
 }

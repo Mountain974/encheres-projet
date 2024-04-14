@@ -1,9 +1,9 @@
 package fr.eni.encheres2.service.implementationJPA;
 
-import fr.eni.encheres2.dto.CategorieDto;
+import fr.eni.encheres2.dto.CategorieDTO;
+import fr.eni.encheres2.entity.Categorie;
 import fr.eni.encheres2.exception.CategorieNotFoundException;
 import fr.eni.encheres2.mapping.CategorieMapper;
-import fr.eni.encheres2.entity.Categorie;
 import fr.eni.encheres2.repository.CategorieRepository;
 import fr.eni.encheres2.service.CategorieService;
 import jakarta.validation.Valid;
@@ -22,25 +22,27 @@ public class CategorieServiceImpl implements CategorieService {
     private CategorieRepository categorieRepository;
 
     @Autowired
-    public CategorieServiceImpl(CategorieMapper modelMapper, CategorieRepository categorieRepository){
+    public CategorieServiceImpl(CategorieMapper modelMapper, CategorieRepository categorieRepository) {
         this.modelMapper = modelMapper;
         this.categorieRepository = categorieRepository;
     }
 
     @Override
-    public List<CategorieDto> consulterCategories() {
+    public List<CategorieDTO> consulterCategories() {
         return categorieRepository.findAll().stream()
                 .map(categorie -> modelMapper.mapToDto(categorie)).collect(Collectors.toList());
     }
 
     @Override
-    public CategorieDto consulterCategorieParNo(Long noCategorie) {
-        Categorie categorie = categorieRepository.findById(noCategorie).orElseThrow(() -> { throw new CategorieNotFoundException("La catégorie demandée n'existe pas");});
+    public CategorieDTO consulterCategorieParNo(Long noCategorie) {
+        Categorie categorie = categorieRepository.findById(noCategorie).orElseThrow(() -> {
+            throw new CategorieNotFoundException("La catégorie demandée n'existe pas");
+        });
         return modelMapper.mapToDto(categorie);
     }
 
     @Override
-    public CategorieDto creerCategorie(@Valid @NotNull CategorieDto categorie) {
+    public CategorieDTO creerCategorie(@Valid @NotNull CategorieDTO categorie) {
         return modelMapper.mapToDto(categorieRepository.save(modelMapper.mapToEntity(categorie)));
     }
 
@@ -50,9 +52,9 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
-    public void modifierCategorie(CategorieDto categorieDto) {
+    public void modifierCategorie(CategorieDTO categorieDto) {
         Categorie categorie = modelMapper.mapToEntity(categorieDto);
-        if (categorieRepository.existsById(categorie.getNoCategorie())){
+        if (categorieRepository.existsById(categorie.getNoCategorie())) {
             categorieRepository.save(categorie);
         } else {
             throw new CategorieNotFoundException("la catégorie n'existe pas");
