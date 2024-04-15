@@ -64,7 +64,6 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
         }
     }
 
-
     @Override
     public List<ArticleVenduDTO> consulterArticlesVendusEtat(String etat) {
         List<ArticleVendu> articleVendu = articleVenduRepository.findByEtat(etat);

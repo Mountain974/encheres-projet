@@ -36,27 +36,30 @@ public class ArticleVendu {
     private Integer miseAPrix;
     @Column(name = "prix_vente")
     private Integer prixVente;
-    @Column(name = "no_vendeur", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "no_vendeur", nullable = false)
     @NotNull
-    private Long noVendeur;
-    @Column(name = "no_acheteur")
-    private Long noAcheteur;
-    @Column(name = "no_categorie", nullable = false)
+    Utilisateur vendeur;
+    @ManyToOne
+    @JoinColumn(name = "no_acheteur")
+    Utilisateur acheteur;
+    @ManyToOne
+    @JoinColumn(name = "no_categorie", nullable = false)
     @NotNull(message = "le choix d'une catégorie est obligatoire")
-    private Long noCategorie;
+    Categorie categorie;
 
-    public ArticleVendu (Long noArticle, String nom, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, Integer miseAPrix, Long noVendeur, Long noCategorie) {
+    public ArticleVendu (Long noArticle, String nom, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Long noCategorie) {
         this.noArticle = noArticle;
         this.nom = nom;
         this.description = description;
         this.dateDebutEncheres = dateDebutEncheres;
         this.dateFinEncheres = dateFinEncheres;
         this.miseAPrix = miseAPrix;
-        this.noVendeur = noVendeur;
-        this.noCategorie = noCategorie;
+        this.vendeur = vendeur;
+        this.categorie = categorie;
     }
 
-    public ArticleVendu (Long noArticle, String nom, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, Integer miseAPrix, Integer prixVente, Long noVendeur, Long noCategorie, Long noAcheteur) {
+    public ArticleVendu (Long noArticle, String nom, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, Integer miseAPrix, Integer prixVente, Utilisateur vendeur, Categorie categorie, Utilisateur acheteur) {
         this.noArticle = noArticle;
         this.nom = nom;
         this.description = description;
@@ -64,9 +67,9 @@ public class ArticleVendu {
         this.dateFinEncheres = dateFinEncheres;
         this.miseAPrix = miseAPrix;
         this.prixVente = prixVente;
-        this.noVendeur = noVendeur;
-        this.noCategorie = noCategorie;
-        this.noAcheteur = noAcheteur;
+        this.vendeur = vendeur;
+        this.categorie = categorie;
+        this.acheteur = acheteur;
     }
 
 }
