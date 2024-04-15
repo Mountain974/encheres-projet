@@ -7,7 +7,7 @@ function Hello() {
     const [hello, setHello] =useState([])
     useEffect(() => {
             fetch("./api/hello")
-                .then(response => response.json())
+                .then(response => response.text())
                 .then(data => setHello(data))
         }, []
     )

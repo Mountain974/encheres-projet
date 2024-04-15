@@ -1,39 +1,24 @@
-import React, {useEffect, useState} from 'react'
+import { Routes, Route, BrowserRouter } from "react-router-dom"
+import Layout from "./views/Layout.jsx"
+import {Connection} from "./views/Connection.jsx";
+import {Header} from "./views/Header.jsx";
+import Home from "./Home.jsx";
 import './App.css'
-import {useQuery} from "@tanstack/react-query";
 
-function App() {
 
-    const [cate, setCate] =useState([   ])
-    useEffect(() => {
-        fetch("./api/categories")
-            .then(response => response.json())
-            .then(data => setCate(data))
-        }, []
-    )
-    const cat = useQuery({
-        queryKey:["categories"],
-        queryFn: () => fetch("./api/categories")
-            .then(response => response.json())
-    })
-
-    if (cat.isPending || cat.isLoading) {
-        return <div>loading</div>
-    }
-    if (cat.error) {
-        return <div>error</div>
-    }
-
+export const App = () => {
     return (
-        <div className="App">
-            <ul>
-                {cate.map((categorie, index) => <li key={index}>{categorie.libelle}</li>)}
-                {cat.data.map((categorie, index) => <li key={index}>{categorie.libelle}</li>)}
-            </ul>
-
-
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route
+                    path="/"
+                    element={<Layout title="home" header={<Header />} main={<Home/>} />}
+                />
+                <Route
+                    path="/connection"
+                    element={<Layout title="connection" header={<Header />} main={<Connection/>} />}
+                />
+            </Routes>
+        </BrowserRouter>
     )
 }
-
-export default App

@@ -2,7 +2,7 @@ import React from "react";
 export const Header = () => {
     return (
         <div id="header3" >
-            <nav className="row bg-white fixed-top p-3">
+            <nav className="navbar navbar-expend-lg bg-body-tertiary">
 
 
                 <div className="col-12 col-md-4">
@@ -20,7 +20,7 @@ export const Header = () => {
 
 
                     <div className="d-flex align-items-center col-md-3 ms-4">
-                        <a className="text-center fs-5" style="white-space: nowrap;" href="/">Se connecter</a>
+                        <a className="text-center fs-5" style={{whiteSpace: "nowrap"}} href="/">Se connecter</a>
                     </div>
 
 
@@ -40,7 +40,7 @@ export const Header = () => {
 
 
                     <div className="text-lg-center text-left px-4">
-                        <a className="fs-5" style="white-space: nowrap;" href="/">Déconnexion</a>
+                        <a className="fs-5" style={{whiteSpace: "nowrap"}} href="/">Déconnexion</a>
                     </div>
                 </div>
             </nav>
