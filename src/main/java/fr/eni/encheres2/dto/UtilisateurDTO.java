@@ -1,6 +1,6 @@
 package fr.eni.encheres2.dto;
 
-import fr.eni.encheres2.entity.ArticleVendu;
+import fr.eni.encheres2.entity.Article;
 import fr.eni.encheres2.entity.Enchere;
 import fr.eni.encheres2.utils.AppConstants;
 import jakarta.persistence.Id;
@@ -56,7 +56,7 @@ public class UtilisateurDTO {
     @NotNull
     private boolean administrateur;
     private List<Enchere> encheres;
-    private List<ArticleVendu> articlesVendus;
+    private List<Article> articlesVendus;
 
     public UtilisateurDTO(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse) {
         this.pseudo = pseudo;
