@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ArticleVenduRepository extends JpaRepository<ArticleVendu, Long> {
-    /*@Query("select article from ArticleVendu where article.nom like : search%")
+    @Query("select article from ArticleVendu where article.nom like : search%")
     List<ArticleVendu> searchByNom(String search);
 
     @Query("SELECT article FROM ArticleVendu article " +
@@ -23,6 +23,6 @@ public interface ArticleVenduRepository extends JpaRepository<ArticleVendu, Long
     @Query("select article from ArticleVendu article " +
             "INNER JOIN article.noCategorie cat " +
             "WHERE cat.libelle = :categorie")
-    List<ArticleVendu> searchByCategorie(@Param("categorie") String categorie);*/
+    List<ArticleVendu> searchByCategorie(@Param("categorie") String categorie);
 
 }
