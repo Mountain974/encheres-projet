@@ -1,16 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import {useQuery} from "@tanstack/react-query";
 
-function App() {
+function Categories() {
 
-    const [cate, setCate] =useState([   ])
+    const [listCategories, setListCategories] = useState([])
+
     useEffect(() => {
         fetch("./api/categories")
             .then(response => response.json())
-            .then(data => setCate(data))
-        }, []
-    )
+            .then(data => setListCategories(data));
+    }, [])
+
     const cat = useQuery({
         queryKey:["categories"],
         queryFn: () => fetch("./api/categories")
@@ -27,7 +28,7 @@ function App() {
     return (
         <div className="App">
             <ul>
-                {cate.map((categorie, index) => <li key={index}>{categorie.libelle}</li>)}
+                {listCategories.map((categorie, index) => <li key={index}>{categorie.libelle}</li>)}
                 {cat.data.map((categorie, index) => <li key={index}>{categorie.libelle}</li>)}
             </ul>
 
@@ -36,4 +37,4 @@ function App() {
     )
 }
 
-export default App
+export default Categories

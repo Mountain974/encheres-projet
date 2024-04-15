@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../../resources/style/style.css">
+    <title>Liste des enchères</title>
+</head>
+
+<body>
+
+<!-- HEADER 3 - MENU PageListeEncheresConnecte ET PageListeEncheresMesVentes -->
+<div id="header3" class="d-none">
+    <nav class="row bg-white fixed-top p-3">
+
+        <!-- BOUTON ACCUEIL-->
+        <div class="col-12 col-md-4">
+            <a href="/" class="logo fs-4">ENI-Encheres</a>
+        </div>
+
+        <!-- BOUTONS ENCHERES / VENDRE / PROFIL / DECONNEXION -->
+        <div class="col-12 col-md-8 d-flex flex-column flex-md-row justify-content-md-end align-items-md-center m-0">
+
+            <!-- BOUTON ENCHERES -->
+            <div class="text-lg-center text-left px-4">
+                <a class="fs-5" href="/">Enchères</a>
+            </div>
+
+            <!-- BOUTON VENDRE UN ARTICLE -->
+            <div class="text-lg-center text-left px-4">
+                <a class="fs-5" href="/">Vendre un article</a>
+            </div>
+
+            <!-- BOUTON MON PROFIL -->
+            <div class="text-lg-center text-left px-4">
+                <a class="fs-5" href="/">Mon profil</a>
+            </div>
+
+            <!-- BOUTON DECONNEXION -->
+            <div class="text-lg-center text-left px-4">
+                <a class="fs-5" style="white-space: nowrap;" href="/">Déconnexion</a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<!-- TITRE DE LA PAGE -->
+<div class="container-fluid">
+    <div class="row title d-flex justify-content-center">
+        <div class="col-auto mt-5">
+            <h1 class="text-white text-center py-3">Liste des enchères</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="d-flex flex-row mb-3">
+        <h3 class="p-2"> Filtres :</h3>
+    </div>
+
+    <!-- MOTEUR DE RECHERCHE / LISTE DEROULANTE DES CATEGORIES / BOUTON RECHERCHER -->
+    <form>
+        <div class="row mx-auto mb-4">
+            <div class="col-md-6 mb-4">
+
+                <!-- Achats / Mes ventes (version mobile) -->
+                <div class="d-md-none">
+                    <div class="row d-flex justify-content-center mb-3">
+
+                        <!-- Formulaire Achats -->
+                        <div class="col-md-6 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="formSelection" id="achatsRadio" checked onclick="selectForm('formAchats')">
+                                <label class="form-check-label" for="achatsRadio"><strong> Achats</strong></label>
+                            </div>
+
+                            <div id="formAchats" class="container mb-3">
+                                <form id="achatsForm">
+                                    <div>
+                                        <input type="checkbox" id="encheresOuvertes" name="encheresOuvertes" value="encheresOuvertes">
+                                        <label class="critere" for="encheresOuvertes">enchères ouvertes</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="encheresEnCours" name="encheresEnCours" value="encheresEnCours">
+                                        <label class="critere" for="encheresEnCours">mes enchères en cours</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="encheresRemportees" name="encheresRemportees" value="encheresRemportees">
+                                        <label class="critere" for="encheresRemportees">mes enchères remportées</label>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Formulaire Mes ventes -->
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="formSelection" id="ventesRadio" onclick="selectForm('formVentes')">
+                                    <label class="form-check-label" for="ventesRadio"><strong> Mes ventes</strong></label>
+                                </div>
+
+                                <div id="formVentes" class="container mb-3">
+                                    <form id="ventesForm">
+                                        <div>
+                                            <input type="checkbox" id="ventesEnCours" name="ventesEnCours" value="ventesEnCours">
+                                            <label class="critere" for="ventesEnCours">mes ventes en cours</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="ventesNonDebutees" name="ventesNonDebutees" value="ventesNonDebutees">
+                                            <label class="critere" for="ventesNonDebutees">ventes non débutées</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id="ventesTerminees" name="ventesTerminees" value="ventesTerminees">
+                                            <label class="critere" for="ventesTerminees">ventes terminées</label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zone de recherche (version desktop) -->
+                <div class="d-none d-md-block">
+                    <div class="row d-flex justify-content-center mb-3">
+                        <div class="col-auto">
+                            <button type="submit" class="btn-icons"><i class="fa-solid fa-magnifying-glass fa-2x"></i></button>
+                        </div>
+                        <div class="col p-0">
+                            <input required type="text" class="form-control" placeholder="Le nom de l'article contient" name="search" id="search">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Liste déroulante des catégories -->
+                <div class="row d-flex align-items-center">
+                    <div class="col-4">
+                        <label class="fs-5">Catégorie :</label>
+                    </div>
+                    <div class="col-8 p-0">
+                        <div class="dropdown-center w-100">
+                            <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Toutes
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Ameublement</a></li>
+                                <li><a class="dropdown-item" href="#">Informatique</a></li>
+                                <li><a class="dropdown-item" href="#">Sport & loisirs</a></li>
+                                <li><a class="dropdown-item" href="#">Vêtement</a></li>
+                                <li><a class="dropdown-item" href="#">Autre</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achats / Mes ventes (version desktop) -->
+                <div class="d-none d-md-block">
+                    <div class="row d-flex justify-content-center my-3">
+
+                        <!-- Formulaire Achats -->
+                        <div class="col-6 p-0">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="formSelection" id="achatsRadio" checked onclick="selectForm('formAchats')">
+                                <label class="form-check-label" for="achatsRadio"><strong> Achats</strong></label>
+                            </div>
+
+                            <div id="formAchats" class="container mb-3">
+                                <form id="achatsForm">
+                                    <div>
+                                        <input type="checkbox" id="encheresOuvertes" name="encheresOuvertes" value="encheresOuvertes">
+                                        <label class="critere" for="encheresOuvertes">enchères ouvertes</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="encheresEnCours" name="encheresEnCours" value="encheresEnCours">
+                                        <label class="critere" for="encheresEnCours">mes enchères en cours</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="encheresRemportees" name="encheresRemportees" value="encheresRemportees">
+                                        <label class="critere" for="encheresRemportees">mes enchères remportées</label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Formulaire Mes ventes -->
+                        <div class="col-6 p-0">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="formSelection" id="ventesRadio" onclick="selectForm('formVentes')">
+                                <label class="form-check-label" for="ventesRadio"><strong> Mes ventes</strong></label>
+                            </div>
+
+                            <div id="formVentes" class="container mb-3">
+                                <form id="ventesForm">
+                                    <div>
+                                        <input type="checkbox" id="ventesEnCours" name="ventesEnCours" value="ventesEnCours">
+                                        <label class="critere" for="ventesEnCours">mes ventes en cours</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="ventesNonDebutees" name="ventesNonDebutees" value="ventesNonDebutees">
+                                        <label class="critere" for="ventesNonDebutees">ventes non débutées</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="ventesTerminees" name="ventesTerminees" value="ventesTerminees">
+                                        <label class="critere" for="ventesTerminees">ventes terminées</label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zone de recherche (version mobile) -->
+                <div class="d-md-none">
+                    <div class="row d-flex justify-content-center my-3">
+                        <div class="col-auto">
+                            <button type="submit" class="btn-icons"><i class="fa-solid fa-magnifying-glass fa-2x"></i></button>
+                        </div>
+                        <div class="col p-0">
+                            <input required type="text" class="form-control" placeholder="Le nom de l'article contient" name="search" id="search">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bouton rechercher -->
+            <div class="col-md-6 mb-4 d-flex justify-content-center align-items-center">
+                <button class="btn btn-secondary w-75" style="height: 100px;" type="button">Rechercher</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- ARTICLES A VENDRE -->
+    <div class="row mx-auto d-flex justify-content-between">
+        <div class="col-md-5 offset-md-1 mb-4 border border-secondary m-0">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <div class="img">
+                        <img alt="photo article">
+                    </div>
+                </div>
+                <div class="col-8 ps-md-3">
+                    <h5 style="text-decoration: underline;">Titre article</h5>
+                    <p style="display: inline;"><strong>Prix : </strong></p> <p style="display: inline;">Nombre de points</p>
+                    <p style="display: inline;"><strong>Classement : </strong></p> <p style="display: inline;">Numéro du rang</p><br>
+                    <p style="display: inline;"><strong>Fin de l'enchère : </strong></p><p style="display: inline;">Date de fin</p><br>
+                    <p style="display: inline;"><strong>Retrait : </strong></p><p style="display: inline;">N° rue et libellé de la voie<br>CODE POSTAL et Ville</p><br>
+                    <p style="display: inline;"><strong>Vendeur : </strong></p><p style="display: inline;">Pseudo vendeur</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 offset-md-1 mb-4 border border-secondary m-0">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <div class="img">
+                        <img alt="photo article">
+                    </div>
+                </div>
+                <div class="col-8 ps-md-3">
+                    <h5 style="text-decoration: underline;">Titre article</h5>
+                    <p style="display: inline;"><strong>Prix : </strong></p> <p style="display: inline;">Nombre de points</p>
+                    <p style="display: inline;"><strong>Classement : </strong></p> <p style="display: inline;">Numéro du rang</p><br>
+                    <p style="display: inline;"><strong>Fin de l'enchère : </strong></p><p style="display: inline;">Date de fin</p><br>
+                    <p style="display: inline;"><strong>Retrait : </strong></p><p style="display: inline;">N° rue et libellé de la voie<br>CODE POSTAL et Ville</p><br>
+                    <p style="display: inline;"><strong>Vendeur : </strong></p><p style="display: inline;">Pseudo vendeur</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---->
+
+<script>
+    function selectForm(formId) {
+        // Mettre en gras les critères du formulaire sélectionné
+        document.querySelectorAll('.critere').forEach((critere) => {
+            critere.style.fontWeight = 'normal'; // Réinitialiser tous les critères d'abord
+        });
+        document.querySelectorAll(`#${formId} .critere`).forEach((critere) => {
+            critere.style.fontWeight = 'bold'; // Mettre en gras les critères du formulaire sélectionné
+        });
+
+        // Désactiver les cases à cocher du formulaire non sélectionné
+        document.querySelectorAll('form').forEach((form) => {
+            if (form.id === formId) {
+                enableFormControls(form);
+            } else {
+                disableFormControls(form);
+            }
+        });
+    }
+
+    function enableFormControls(form) {
+        form.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+            checkbox.disabled = false;
+        });
+    }
+
+    function disableFormControls(form) {
+        form.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+            checkbox.disabled = true;
+        });
+    }
+</script>
+</body>
+
+</html>

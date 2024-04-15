@@ -1,42 +1,126 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* PARAMETRES GENERAUX */
+
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+  color: #1c244f;
+}
+
+body {
+  background-color: white;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+  font-size: 20px;
+  color: #1c244f;
+  text-decoration:none;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  font-size: 20px;
+  color: #b49141;
+  text-decoration:none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.nav-item {
+  font-size: 20px;
+  color: #1c244f;
 }
 
-.card {
-  padding: 2em;
+.nav-item:hover {
+  font-size: 20px;
+  color: #b49141;
 }
 
-.read-the-docs {
-  color: #888;
+.nav-link {
+  font-size: 15px;
+  color: #1c244f;
 }
+
+.nav-link:hover {
+  font-size: 15px;
+  color: #b49141;
+}
+
+.dropdown-item {
+  color: #1c244f;
+}
+
+.dropdown-item:hover {
+  font-size: 20px;
+  color: #b49141;
+}
+
+h1 {
+  color: #1c244f;
+  font-size: 35px;
+}
+
+h2 {
+  color: #b49141;
+  font-size: 28px;
+}
+
+.title {
+  background-color: #1c244f;
+  color: white;
+}
+
+p {
+  color: #5b6971;
+  font-size: 20px;
+}
+
+/* PAGINATION */
+   .page-link {
+     background-color: #1c244f;
+     color: white;
+   }
+
+.page-link:hover {
+  background-color: #b49141;
+  color: white;
+}
+
+/* PARAMETRES GENERAUX BOUTONS */
+   .btn {
+     background-color: #1c244f;
+     border-color: transparent;
+     color: white;
+   }
+
+.btn:hover {
+  background-color: #b49141;
+  border-color: transparent;
+  color: white;
+}
+
+/*  BOUTON VALIDATION/CONFIRMATION */
+                     .btn_confirm {
+                       background-color: #1c244f;
+                       border-color: transparent;
+                       color: white;
+                     }
+
+.btn_confirm:hover {
+  background-color: green;
+  border-color: transparent;
+  color: white;
+}
+
+/* BOUTON REFUS/SUPPRESSION */
+                .btn_supp {
+                  background-color: #1c244f;
+                  border-color: transparent;
+                  color: white;
+                }
+
+.btn_supp:hover {
+  background-color: red;
+  border-color: transparent;
+  color: white;
+}
+
+
