@@ -29,12 +29,17 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleDTO consulterArticleVenduParNo(Long noArticle) {
-        Article article = articleRepository.findById(noArticle).
-                orElseThrow(() -> {throw new ResponseStatusException(HttpStatus.NOT_FOUND, "l'article n'existe pas");});
-        return modelMapper.mapToDto(article);
+    public List<ArticleDTO> consulterArticles() {
+        return articleRepository.findAll().stream()
+                .map(article -> modelMapper.mapToDto(article)).collect(Collectors.toList());
     }
 
+    @Override
+    public ArticleDTO consulterArticleVenduParNo(Long noArticle) {
+        Article article = articleRepository.findById(noArticle)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "L'article n'existe pas"));
+        return modelMapper.mapToDto(article);
+    }
 
     @Override
     public void creerArticleVendu(@Valid @NotNull ArticleDTO articleDTO) {
@@ -61,18 +66,9 @@ public class ArticleServiceImpl implements ArticleService {
         }
     }
 
-    /*@Override
-    public List<ArticleDTO> consulterArticlesVendusEtat(String etat) {
-        List<Article> articleVendu = articleRepository.findByEtat(etat);
-        if (articleVendu.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pas d'articles");
-        }
-        return articleVendu.stream()
-                .map(article -> modelMapper.mapToDto(article))
-                .collect(Collectors.toList());
-    }
 
-    @Override
+
+    /*@Override
     public List<ArticleDTO> rechercherArticlesVendus(String search) {
         List<Article> articleVendu = articleRepository.searchByNom(search);
         if (articleVendu.isEmpty()) {
@@ -99,10 +95,6 @@ public class ArticleServiceImpl implements ArticleService {
                 .collect(Collectors.toList());
     }*/
 
-    @Override
-    public List<ArticleDTO> consulterArticlesVendusEtat(String etat) {
-        return List.of();
-    }
 
     @Override
     public List<ArticleDTO> rechercherArticlesVendus(String search) {

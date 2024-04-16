@@ -16,7 +16,7 @@ public interface ArticleService {
 
     void supprimerArticleVendu(Long noArticle); //supprimer un article
 
-    List<ArticleDTO> consulterArticlesVendusEtat(String etat);
+    List<ArticleDTO> consulterArticles();
 
     List<ArticleDTO> rechercherArticlesVendus(String search); //par champs de recherche
 
