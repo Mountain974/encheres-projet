@@ -17,13 +17,12 @@ import java.util.stream.Collectors;
 @Service
 public class EnchereServiceImpl implements EnchereService {
 
-
     private EnchereMapper modelMapper;
 
     private EnchereRepository enchereRepository;
 
     @Autowired
-    public EnchereServiceImpl(EnchereMapper modelMapper, EnchereRepository enchereRepository) {
+    public EnchereServiceImpl(EnchereMapper modelMapper, EnchereRepository enchereRepository){
         this.modelMapper = modelMapper;
         this.enchereRepository = enchereRepository;
     }
@@ -36,9 +35,7 @@ public class EnchereServiceImpl implements EnchereService {
 
     @Override
     public EnchereDTO consulterEnchereParId(Long id) {
-        Enchere enchere = enchereRepository.findById(id).orElseThrow(() -> {
-            throw new EnchereNotFoundException("L'enchère demandée n'existe pas");
-        });
+        Enchere enchere = enchereRepository.findById(id).orElseThrow(() -> { throw new EnchereNotFoundException("L'enchère demandée n'existe pas");});
         return modelMapper.mapToDto(enchere);
     }
 
@@ -49,6 +46,6 @@ public class EnchereServiceImpl implements EnchereService {
 
     @Override
     public List<EnchereDTO> afficherEncheresParUtilisateur(Long noUtilisateur) {
-        return List.of();
+        return null;
     }
 }

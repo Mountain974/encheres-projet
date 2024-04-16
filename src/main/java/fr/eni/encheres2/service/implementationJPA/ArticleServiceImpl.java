@@ -1,8 +1,8 @@
 package fr.eni.encheres2.service.implementationJPA;
 
 import fr.eni.encheres2.dto.ArticleDTO;
-import fr.eni.encheres2.entity.Article;
 import fr.eni.encheres2.mapping.ArticleMapper;
+import fr.eni.encheres2.entity.Article;
 import fr.eni.encheres2.repository.ArticleRepository;
 import fr.eni.encheres2.service.ArticleService;
 import jakarta.validation.Valid;
@@ -15,35 +15,41 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Service
 public class ArticleServiceImpl implements ArticleService {
-
-    private final ArticleMapper modelMapper = new ArticleMapper();
+    private final ArticleMapper modelMapper;
     private final ArticleRepository articleRepository;
 
     @Autowired
-    public ArticleServiceImpl(ArticleRepository articleRepository) {
+    public ArticleServiceImpl(ArticleMapper modelMapper, ArticleRepository articleRepository) {
+        this.modelMapper = modelMapper;
         this.articleRepository = articleRepository;
 
     }
 
     @Override
-    public ArticleDTO consulterArticleParNo(Long noArticle) {
-        Article article = articleRepository.findById(noArticle).
-                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "l'article n'existe pas"));
+    public List<ArticleDTO> consulterArticles() {
+        return articleRepository.findAll().stream()
+                .map(article -> modelMapper.mapToDto(article)).collect(Collectors.toList());
+    }
+
+    @Override
+    public ArticleDTO consulterArticleVenduParNo(Long noArticle) {
+        Article article = articleRepository.findById(noArticle)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "L'article n'existe pas"));
         return modelMapper.mapToDto(article);
     }
 
-
     @Override
-    public void creerArticle(@Valid @NotNull ArticleDTO articleDTO) {
+    public void creerArticleVendu(@Valid @NotNull ArticleDTO articleDTO) {
         modelMapper.mapToDto(articleRepository.save(modelMapper.mapToEntity(articleDTO)));
     }
 
     @Override
-    public void modifierArticle(ArticleDTO articleDTO) {
+    public void modifierArticleVendu(ArticleDTO articleDTO) {
         Article article = modelMapper.mapToEntity(articleDTO);
-        if (articleRepository.existsById(article.getNoArticle())) {
+        if (articleRepository.existsById(article.getNoArticle())){
             articleRepository.save(article);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "la retrait n'existe pas");
@@ -52,45 +58,52 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void supprimerArticle(@NotNull Long noArticle) {
-        if (articleRepository.findById(noArticle).isPresent()) {
+    public void supprimerArticleVendu(@NotNull Long noArticle) {
+        if (articleRepository.findById(noArticle).isPresent()){
             articleRepository.deleteById(noArticle);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "l'article n'existe pas");
         }
     }
 
-    @Override
-    public List<ArticleDTO> consulterArticlesVendusEtat(String etat) {
-        List<Article> article = articleRepository.findByEtat(etat);
-        if (article.isEmpty()) {
+
+
+    /*@Override
+    public List<ArticleDTO> rechercherArticlesVendus(String search) {
+        List<Article> articleVendu = articleRepository.searchByNom(search);
+        if (articleVendu.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pas d'articles");
         }
-        return article.stream()
-                .map(modelMapper::mapToDto)
+        return articleVendu.stream()
+                .map(article -> modelMapper.mapToDto(article))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<ArticleDTO> rechercherArticlesVendus(String search) {
-        List<Article> article = articleRepository.searchByNom(search);
-        if (article.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pas d'articles");
-        }
-        return article.stream()
-                .map(modelMapper::mapToDto)
-                .collect(Collectors.toList());
+    public List<ArticleDTO> rechercherArticlesVendusParFiltre(String parametresRecherche) {
+        return List.of();
     }
 
     @Override
     public List<ArticleDTO> rechercherArticlesVendusParFiltre(String categorie) {
-        List<Article> article = articleRepository.searchByCategorie(categorie);
-        if (article.isEmpty()) {
+        List<Article> articleVendu = articleRepository.searchByCategorie(categorie);
+        if (articleVendu.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pas d'articles");
         }
-        return article.stream()
-                .map(modelMapper::mapToDto)
+        return articleVendu.stream()
+                .map(article -> modelMapper.mapToDto(article))
                 .collect(Collectors.toList());
+    }*/
+
+
+    @Override
+    public List<ArticleDTO> rechercherArticlesVendus(String search) {
+        return List.of();
+    }
+
+    @Override
+    public List<ArticleDTO> rechercherArticlesVendusParFiltre(String parametresRecherche) {
+        return List.of();
     }
 
     @Override

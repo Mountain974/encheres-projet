@@ -1,6 +1,8 @@
 package fr.eni.encheres2.dto;
 
-import jakarta.persistence.Id;
+import fr.eni.encheres2.entity.Categorie;
+import fr.eni.encheres2.entity.Utilisateur;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -8,16 +10,18 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Data
+
+
+@Data // génère getter/setter/
 @NoArgsConstructor
 public class ArticleDTO {
     @Id
     private Long noArticle;
     @NotNull(message = "le nom de l'article est obligatoire")
-    @Size(max = 30)
+    @Size(max=30)
     private String nom;
     @NotNull(message = "la description est obligatoire")
-    @Size(min = 10, max = 300)
+    @Size(min=10, max=300)
     private String description;
     @NotNull(message = "la date de début des enchères est obligatoire")
     private LocalDate dateDebutEncheres;
@@ -25,38 +29,39 @@ public class ArticleDTO {
     private LocalDate dateFinEncheres;
     private Integer miseAPrix;
     private Integer prixVente;
-    @NotNull
-    private Long noVendeur;
-    private Long noAcheteur;
+    @NotNull(message = "l'acheteur est obligatoire")
+    Utilisateur vendeur;
+    Utilisateur acheteur;
     @NotNull(message = "le choix d'une catégorie est obligatoire")
-    private Long noCategorie;
+    Categorie categorie;
     private String etat;
 
 
-    public ArticleDTO(Long noArticle, String nom, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, Integer miseAPrix, Long noVendeur, Long noCategorie) {
+    public ArticleDTO(Long noArticle, String nom, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Categorie categorie) {
         this.noArticle = noArticle;
         this.nom = nom;
         this.description = description;
         this.dateDebutEncheres = dateDebutEncheres;
         this.dateFinEncheres = dateFinEncheres;
         this.miseAPrix = miseAPrix;
-        this.noVendeur = noVendeur;
-        this.noCategorie = noCategorie;
+        this.vendeur = vendeur;
+        this.categorie = categorie;
         this.etat = calculerEtat(dateDebutEncheres, dateFinEncheres);
     }
 
-    public ArticleDTO(Long noArticle, String nom, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, Integer miseAPrix, Integer prixVente, Long noVendeur, Long noCategorie, Long noAcheteur) {
+    public ArticleDTO(Long noArticle, String nom, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, Integer miseAPrix, Integer prixVente, Utilisateur vendeur, Categorie categorie, Utilisateur acheteur) {
         this.noArticle = noArticle;
         this.nom = nom;
         this.description = description;
         this.dateDebutEncheres = dateDebutEncheres;
+
         this.dateFinEncheres = dateFinEncheres;
         this.miseAPrix = miseAPrix;
         this.prixVente = prixVente;
-        this.noVendeur = noVendeur;
-        this.noCategorie = noCategorie;
+        this.vendeur = vendeur;
+        this.categorie = categorie;
         this.etat = calculerEtat(dateDebutEncheres, dateFinEncheres);
-        this.noAcheteur = noAcheteur;
+        this.acheteur = acheteur;
     }
 
     private String calculerEtat(LocalDate dateDebutEncheres, LocalDate dateFinEncheres) {

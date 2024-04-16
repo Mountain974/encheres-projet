@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @NoArgsConstructor
-public class ArticleMapper extends CustomModelMapper implements Mapper<Article, ArticleDTO> {
+public class ArticleMapper extends CustomModelMapper implements Mapper<Article, ArticleDTO>{
 
     public ArticleMapper(ModelMapper modelMapper) {
         super();

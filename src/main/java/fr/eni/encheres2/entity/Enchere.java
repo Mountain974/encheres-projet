@@ -13,17 +13,24 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Enchere {
 
-    @ManyToOne
-    @JoinColumn(name = "no_utilisateur")
-    Utilisateur utilisateur;
-    @ManyToOne
-    @JoinColumn(name = "no_article")
-    Article article;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotNull(message = "la date de l'enchère obligatoire")
-    @Column(name = "date_enchere")
+    @Column(name="date_enchere")
     private LocalDate dateEnchere;
+
+    @NotNull(message = "le montant de l'enchère doit être supérieur à zéro")
+    @Column(name="montant_enchere")
+    private Integer montantEnchere;
+
+    @ManyToOne
+    @JoinColumn(name = "no_utilisateur")
+    Utilisateur utilisateur;
+
+    @ManyToOne
+    @JoinColumn(name = "no_article")
+    Article article;
 
 }

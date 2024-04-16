@@ -1,8 +1,6 @@
 package fr.eni.encheres2.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -11,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Data
+@Data // génère getter/setter/
 @NoArgsConstructor
 @AllArgsConstructor
 public class Retrait {
@@ -20,15 +18,17 @@ public class Retrait {
     private Long noArticle;
     @NotNull(message = "la rue est obligatoire")
     @Column(length = 50, nullable = false)
-    @Size(max = 50)
+    @Size(max=50)
     private String rue;
     @NotNull(message = "le code postal est obligatoire")
     @Column(name = "code_postal", length = 5, nullable = false)
-    @Size(min = 5, max = 5)
+    @Size(min=5, max=5)
     private String codePostal;
     @NotNull(message = "la ville est obligatoire")
     @Column(length = 45, nullable = false)
-    @Size(max = 45)
+    @Size(max=45)
     private String ville;
+
+
 
 }

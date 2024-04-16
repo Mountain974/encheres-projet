@@ -3,6 +3,7 @@ package fr.eni.encheres2.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,30 +13,20 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table
 public class Article {
-    @ManyToOne
-    @JoinColumn(name = "no_vendeur", nullable = false)
-    @NotNull
-    Utilisateur vendeur;
-    @ManyToOne
-    @JoinColumn(name = "no_acheteur")
-    Utilisateur acheteur;
-    @ManyToOne
-    @JoinColumn(name = "no_categorie", nullable = false)
-    @NotNull(message = "le choix d'une catégorie est obligatoire")
-    Categorie categorie;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "no_article")
     private Long noArticle;
     @Column(name = "nom_article", length = 30, nullable = false)
     @NotNull(message = "le nom de l'article est obligatoire")
-    @Size(max = 30)
+    @Size(max=30)
     private String nom;
     @NotNull(message = "la description est obligatoire")
     @Column(length = 300, nullable = false)
-    @Size(min = 10, max = 300)
+    @Size(min=10, max=300)
     private String description;
     @Column(name = "date_debut_encheres", nullable = false)
     @NotNull(message = "la date de début des enchères est obligatoire")
@@ -47,6 +38,17 @@ public class Article {
     private Integer miseAPrix;
     @Column(name = "prix_vente")
     private Integer prixVente;
+    @ManyToOne
+    @JoinColumn(name = "no_vendeur", nullable = false)
+    @NotNull
+    Utilisateur vendeur;
+    @ManyToOne
+    @JoinColumn(name = "no_acheteur")
+    Utilisateur acheteur;
+    @ManyToOne
+    @JoinColumn(name = "no_categorie", nullable = false)
+    @NotNull(message = "le choix d'une catégorie est obligatoire")
+    Categorie categorie;
 
     public Article(Long noArticle, String nom, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Long noCategorie) {
         this.noArticle = noArticle;

@@ -13,12 +13,10 @@ public class EnchereMapper extends CustomModelMapper implements Mapper<Enchere, 
         super();
         this.modelMapper = modelMapper;
     }
-
     @Override
     public Enchere mapToEntity(EnchereDTO dto) {
         return modelMapper.map(dto, Enchere.class);
     }
-
     @Override
     public EnchereDTO mapToDto(Enchere entity) {
         return modelMapper.map(entity, EnchereDTO.class);

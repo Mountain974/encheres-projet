@@ -2,7 +2,7 @@ package fr.eni.encheres2.dto;
 
 import fr.eni.encheres2.entity.Article;
 import fr.eni.encheres2.entity.Utilisateur;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;

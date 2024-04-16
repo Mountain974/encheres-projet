@@ -4,6 +4,7 @@ import fr.eni.encheres2.dto.CategorieDTO;
 import fr.eni.encheres2.service.CategorieService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class CategorieController {
 
     private CategorieService categorieService;
 
-    public CategorieController(CategorieService categorieService) {
+    public CategorieController(CategorieService categorieService){
         this.categorieService = categorieService;
     }
 

@@ -15,4 +15,5 @@ public interface EnchereService {
     EnchereDTO creerEnchere(EnchereDTO enchere);
 
     List<EnchereDTO> afficherEncheresParUtilisateur(Long noUtilisateur);
+
 }

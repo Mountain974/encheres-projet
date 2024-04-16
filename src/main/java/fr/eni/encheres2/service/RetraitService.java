@@ -8,10 +8,12 @@ public interface RetraitService {
 
     RetraitDTO consulterRetraitParId(Long noArticle);
 
-    void creerRetrait(RetraitDTO retraitDTO);
+    RetraitDTO creerRetrait(RetraitDTO retraitDTO);
 
     void modifierRetrait(RetraitDTO retraitDTO);
 
     void supprimerRetrait(Long noArticle);
+
+
 
 }
