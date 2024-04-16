@@ -1,6 +1,6 @@
 package fr.eni.encheres2.service;
 
-import fr.eni.encheres2.dto.CategorieDto;
+import fr.eni.encheres2.dto.CategorieDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,14 +8,14 @@ import java.util.List;
 @Service
 public interface CategorieService {
 
-    List<CategorieDto> consulterCategories();
+    List<CategorieDTO> consulterCategories();
 
-    CategorieDto consulterCategorieParNo(Long noCategorie);
+    CategorieDTO consulterCategorieParNo(Long noCategorie);
 
-    CategorieDto creerCategorie(CategorieDto categorie);
+    CategorieDTO creerCategorie(CategorieDTO categorie);
 
     void supprimerCategorie(Long noCategorie);
 
-    void modifierCategorie(CategorieDto categorie);
+    void modifierCategorie(CategorieDTO categorie);
 
 }
