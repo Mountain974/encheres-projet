@@ -1,6 +1,5 @@
 package fr.eni.encheres2.service;
 
-import fr.eni.encheres2.dto.EnchereDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,10 +7,12 @@ import java.util.List;
 @Service
 public interface EnchereService {
 
-    List<EnchereDto> consulterEncheres();
+    List<EnchereDTO1> consulterEncheres();
 
-    EnchereDto consulterEnchereParId(Long id);
+    EnchereDTO1 consulterEnchereParId(Long id);
 
-    EnchereDto creerEnchere(EnchereDto enchere);
+    EnchereDTO1 creerEnchere(EnchereDTO1 enchere);
+
+    List<EnchereDTO1> afficherEncheresParUtilisateur(Long noUtilisateur);
 
 }

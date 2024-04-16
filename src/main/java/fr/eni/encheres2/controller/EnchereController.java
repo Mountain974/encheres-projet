@@ -1,13 +1,9 @@
 package fr.eni.encheres2.controller;
 
-import fr.eni.encheres2.dto.EnchereDto;
 import fr.eni.encheres2.service.EnchereService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,13 +19,13 @@ public class EnchereController {
     }
 
     @GetMapping
-    public List<EnchereDto> afficherEncheres() {
+    public List<EnchereDTO1> afficherEncheres() {
         return enchereService.consulterEncheres();
     }
 
     @GetMapping("/{noUtilisateur}")
-    public ResponseEntity<EnchereDto> afficherEnchereParId(@PathVariable @NotNull Long id) {
-        EnchereDto enchereDto = enchereService.consulterEnchereParId(id);
+    public ResponseEntity<EnchereDTO1> afficherEnchereParId(@PathVariable @NotNull Long id) {
+        EnchereDTO1 enchereDto = enchereService.consulterEnchereParId(id);
         if (enchereDto != null) {
             return ResponseEntity.ok(enchereDto);
         } else {
@@ -38,8 +34,8 @@ public class EnchereController {
     }
 
     @PostMapping("/creer")
-    public ResponseEntity<Void> ajouterEnchere(@RequestBody @Valid EnchereDto enchereDto) {
-        enchereService.creerEnchere(enchereDto);
+    public ResponseEntity<Void> ajouterEnchere(@RequestBody @Valid EnchereDTO1 enchereDTO) {
+        enchereService.creerEnchere(enchereDTO);
         return  ResponseEntity.ok().build();
     }
 }
