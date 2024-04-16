@@ -31,6 +31,6 @@ public class Enchere {
 
     @ManyToOne
     @JoinColumn(name = "no_article")
-    ArticleVendu articleVendu;
+    Article article;
 
 }

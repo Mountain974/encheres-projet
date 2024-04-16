@@ -1,7 +1,8 @@
 package fr.eni.encheres2.controller;
 
-import fr.eni.encheres2.dto.UtilisateurDTO;
 import fr.eni.encheres2.dto.ArticleDTO;
+import fr.eni.encheres2.dto.EnchereDTO;
+import fr.eni.encheres2.dto.UtilisateurDTO;
 import fr.eni.encheres2.service.ArticleService;
 import fr.eni.encheres2.service.EnchereService;
 import fr.eni.encheres2.service.implementationJPA.UtilisateurServiceImpl;
@@ -61,7 +62,7 @@ public class UtilisateurController {
     }
 
     @GetMapping("/{noUtilisateur}/encheres")
-    public List<EnchereDTO1> afficherEncheres(@PathVariable Long noUtilisateur) {
+    public List<EnchereDTO> afficherEncheres(@PathVariable Long noUtilisateur) {
         return enchereService.afficherEncheresParUtilisateur(noUtilisateur);
     }
 

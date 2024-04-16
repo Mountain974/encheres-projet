@@ -24,7 +24,7 @@ public class EnchereController {
         return enchereService.consulterEncheres();
     }
 
-    @GetMapping("/{noUtilisateur}")
+    @GetMapping("/{id}")
     public ResponseEntity<EnchereDTO> afficherEnchereParId(@PathVariable @NotNull Long id) {
         EnchereDTO enchereDto = enchereService.consulterEnchereParId(id);
         if (enchereDto != null) {
