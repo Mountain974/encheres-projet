@@ -1,5 +1,6 @@
 package fr.eni.encheres2.service.implementationJPA;
 
+import fr.eni.encheres2.dto.EnchereDTO;
 import fr.eni.encheres2.entity.Enchere;
 import fr.eni.encheres2.exception.EnchereNotFoundException;
 import fr.eni.encheres2.mapping.EnchereMapper;
@@ -27,24 +28,24 @@ public class EnchereServiceImpl implements EnchereService {
     }
 
     @Override
-    public List<EnchereDTO1> consulterEncheres() {
+    public List<EnchereDTO> consulterEncheres() {
         return enchereRepository.findAll().stream()
                 .map(enchere -> modelMapper.mapToDto(enchere)).collect(Collectors.toList());
     }
 
     @Override
-    public EnchereDTO1 consulterEnchereParId(Long id) {
+    public EnchereDTO consulterEnchereParId(Long id) {
         Enchere enchere = enchereRepository.findById(id).orElseThrow(() -> { throw new EnchereNotFoundException("L'enchère demandée n'existe pas");});
         return modelMapper.mapToDto(enchere);
     }
 
     @Override
-    public EnchereDTO1 creerEnchere(@Valid @NotNull EnchereDTO1 enchere) {
+    public EnchereDTO creerEnchere(@Valid @NotNull EnchereDTO enchere) {
         return modelMapper.mapToDto(enchereRepository.save(modelMapper.mapToEntity(enchere)));
     }
 
     @Override
-    public List<EnchereDTO1> afficherEncheresParUtilisateur(Long noUtilisateur) {
+    public List<EnchereDTO> afficherEncheresParUtilisateur(Long noUtilisateur) {
         return null;
     }
 }

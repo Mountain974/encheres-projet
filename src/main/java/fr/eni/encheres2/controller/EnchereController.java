@@ -1,5 +1,6 @@
 package fr.eni.encheres2.controller;
 
+import fr.eni.encheres2.dto.EnchereDTO;
 import fr.eni.encheres2.service.EnchereService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -19,13 +20,13 @@ public class EnchereController {
     }
 
     @GetMapping
-    public List<EnchereDTO1> afficherEncheres() {
+    public List<EnchereDTO> afficherEncheres() {
         return enchereService.consulterEncheres();
     }
 
     @GetMapping("/{noUtilisateur}")
-    public ResponseEntity<EnchereDTO1> afficherEnchereParId(@PathVariable @NotNull Long id) {
-        EnchereDTO1 enchereDto = enchereService.consulterEnchereParId(id);
+    public ResponseEntity<EnchereDTO> afficherEnchereParId(@PathVariable @NotNull Long id) {
+        EnchereDTO enchereDto = enchereService.consulterEnchereParId(id);
         if (enchereDto != null) {
             return ResponseEntity.ok(enchereDto);
         } else {
@@ -34,7 +35,7 @@ public class EnchereController {
     }
 
     @PostMapping("/creer")
-    public ResponseEntity<Void> ajouterEnchere(@RequestBody @Valid EnchereDTO1 enchereDTO) {
+    public ResponseEntity<Void> ajouterEnchere(@RequestBody @Valid EnchereDTO enchereDTO) {
         enchereService.creerEnchere(enchereDTO);
         return  ResponseEntity.ok().build();
     }
