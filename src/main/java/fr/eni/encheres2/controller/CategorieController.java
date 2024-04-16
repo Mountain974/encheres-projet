@@ -1,6 +1,6 @@
 package fr.eni.encheres2.controller;
 
-import fr.eni.encheres2.dto.CategorieDto;
+import fr.eni.encheres2.dto.CategorieDTO;
 import fr.eni.encheres2.service.CategorieService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -22,7 +22,7 @@ public class CategorieController {
     }
 
     @GetMapping
-    public List<CategorieDto> afficherCategories() {
+    public List<CategorieDTO> afficherCategories() {
         return categorieService.consulterCategories();
     }
 
@@ -34,12 +34,12 @@ public class CategorieController {
 
     @GetMapping("/nouvelleCategorie")
     public String afficherFormulaireCreationCategorie(Model model) {
-        model.addAttribute("article", new CategorieDto());
+        model.addAttribute("article", new CategorieDTO());
         return "nouvelCategorie";
     }
 
     @PostMapping("/creer")
-    public String ajouterCategorie(@Valid CategorieDto categorie, BindingResult bindingResult) {
+    public String ajouterCategorie(@Valid CategorieDTO categorie, BindingResult bindingResult) {
         categorieService.creerCategorie(categorie);
 
         if (bindingResult.hasErrors()) {
@@ -58,7 +58,7 @@ public class CategorieController {
     @GetMapping("/{noCategorie}/supprimer")
     public String supprimerUneCategorie(@PathVariable Long noCategorie, Model model) {
 
-        CategorieDto categorie = categorieService.consulterCategorieParNo(noCategorie);
+        CategorieDTO categorie = categorieService.consulterCategorieParNo(noCategorie);
 
         model.addAttribute("message", "Êtes vous sur de vouloir supprimer la catégorie : " + categorie.getLibelle());
         model.addAttribute("action", "/categories/" + noCategorie + "/supprimer");

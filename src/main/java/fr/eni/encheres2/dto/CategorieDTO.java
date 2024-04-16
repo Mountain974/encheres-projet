@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CategorieDto {
+public class CategorieDTO {
     @Id
     private Long noCategorie;
 
@@ -17,7 +17,7 @@ public class CategorieDto {
     @Size(max=30)
     private String libelle;
 
-    public CategorieDto(Long noCategorie, String libelle) {
+    public CategorieDTO(Long noCategorie, String libelle) {
         this.noCategorie = noCategorie;
         this.libelle = libelle;
     }
