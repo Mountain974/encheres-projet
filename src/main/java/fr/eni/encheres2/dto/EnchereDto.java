@@ -17,4 +17,7 @@ public class EnchereDto {
     @NotNull(message = "la date de l'enchère obligatoire")
     private LocalDate dateEnchere;
 
+    @NotNull(message = "le montant de l'enchère doit être supérieur à zéro")
+    private Integer montantEnchere;
+
 }

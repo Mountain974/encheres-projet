@@ -21,6 +21,10 @@ public class Enchere {
     @Column(name="date_enchere")
     private LocalDate dateEnchere;
 
+    @NotNull(message = "le montant de l'enchère doit être supérieur à zéro")
+    @Column(name="montant_enchere")
+    private Integer montantEnchere;
+
     @ManyToOne
     @JoinColumn(name = "no_utilisateur")
     Utilisateur utilisateur;

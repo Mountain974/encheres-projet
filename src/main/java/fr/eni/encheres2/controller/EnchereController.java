@@ -4,6 +4,8 @@ import fr.eni.encheres2.dto.EnchereDto;
 import fr.eni.encheres2.service.EnchereService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -25,25 +27,19 @@ public class EnchereController {
         return enchereService.consulterEncheres();
     }
 
-    @GetMapping("/{id}")
-    public String afficherEnchereParId(@PathVariable("id") @NotBlank Long id, Model model) {
-        model.addAttribute("enchere", enchereService.consulterEnchereParId(id));
-        return "enchere";
-    }
-
-    @GetMapping("/nouvelleEnchere")
-    public String afficherFormulaireCreationEnchere(Model model) {
-        model.addAttribute("enchere", new EnchereDto());
-        return "nouvelleEnchere";
+    @GetMapping("/{noUtilisateur}")
+    public ResponseEntity<EnchereDto> afficherEnchereParId(@PathVariable @NotNull Long id) {
+        EnchereDto enchereDto = enchereService.consulterEnchereParId(id);
+        if (enchereDto != null) {
+            return ResponseEntity.ok(enchereDto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/creer")
-    public String ajouterEnchere(@Valid EnchereDto enchere, BindingResult bindingResult) {
-        enchereService.creerEnchere(enchere);
-
-        if (bindingResult.hasErrors()) {
-            return "creer";
-        }
-        return "redirect:/encheres";
+    public ResponseEntity<Void> ajouterEnchere(@RequestBody @Valid EnchereDto enchereDto) {
+        enchereService.creerEnchere(enchereDto);
+        return  ResponseEntity.ok().build();
     }
 }
