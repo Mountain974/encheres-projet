@@ -2,7 +2,7 @@ package fr.eni.encheres2.dto;
 
 import fr.eni.encheres2.entity.Article;
 import fr.eni.encheres2.entity.Utilisateur;
-import jakarta.persistence.*;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-public class EnchereDto {
+public class EnchereDTO {
 
     @Id
     private Long id;
