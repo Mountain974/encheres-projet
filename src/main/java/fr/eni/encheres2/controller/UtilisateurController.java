@@ -1,8 +1,8 @@
 package fr.eni.encheres2.controller;
 
+import fr.eni.encheres2.dto.ArticleDTO;
 import fr.eni.encheres2.dto.EnchereDTO;
 import fr.eni.encheres2.dto.UtilisateurDTO;
-import fr.eni.encheres2.dto.ArticleDTO;
 import fr.eni.encheres2.service.ArticleService;
 import fr.eni.encheres2.service.EnchereService;
 import fr.eni.encheres2.service.implementationJPA.UtilisateurServiceImpl;
@@ -34,7 +34,7 @@ public class UtilisateurController {
 
     @GetMapping("/{noUtilisateur}")
     public ResponseEntity<UtilisateurDTO> afficherUnUtilisateur(@PathVariable Long noUtilisateur) {
-        UtilisateurDTO userDTO = utilisateurService.trouverUtilisateur(noUtilisateur);
+        UtilisateurDTO userDTO = utilisateurService.trouverUtilisateurParId(noUtilisateur);
         if (userDTO != null) {
             return ResponseEntity.ok(userDTO);
         } else {

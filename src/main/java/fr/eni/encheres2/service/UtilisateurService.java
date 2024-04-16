@@ -10,7 +10,9 @@ public interface UtilisateurService {
 
     void creerUtilisateur(UtilisateurDTO utilisateurDTO);
 
-    UtilisateurDTO trouverUtilisateur(long id);
+    UtilisateurDTO trouverUtilisateurParId(long id);
+
+    UtilisateurDTO trouverUtilisateurParEmail(String email);
 
     void modifierUtilisateur(UtilisateurDTO utilisateurDTO);
 

@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 public class Categorie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="no_categorie")
+    @Column(name = "no_categorie")
     private Long noCategorie;
 
     @NotNull(message = "le libellé de la catégorie est obligatoire")
-    @Size(max=30)
+    @Size(max = 30)
     @Column(length = 30, nullable = false)
     private String libelle;
 

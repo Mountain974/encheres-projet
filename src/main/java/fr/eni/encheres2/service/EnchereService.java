@@ -7,5 +7,13 @@ import java.util.List;
 
 @Service
 public interface EnchereService {
+
+    List<EnchereDTO> consulterEncheres();
+
+    EnchereDTO consulterEnchereParId(Long id);
+
+    EnchereDTO creerEnchere(EnchereDTO enchere);
+
     List<EnchereDTO> afficherEncheresParUtilisateur(Long noUtilisateur);
+
 }
