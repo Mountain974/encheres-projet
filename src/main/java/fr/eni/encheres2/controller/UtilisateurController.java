@@ -34,7 +34,7 @@ public class UtilisateurController {
 
     @GetMapping("/{noUtilisateur}")
     public ResponseEntity<UtilisateurDTO> afficherUnUtilisateur(@PathVariable Long noUtilisateur) {
-        UtilisateurDTO userDTO = utilisateurService.trouverUtilisateurParId(noUtilisateur);
+        UtilisateurDTO userDTO = utilisateurService.trouverUtilisateur(noUtilisateur);
         if (userDTO != null) {
             return ResponseEntity.ok(userDTO);
         } else {
