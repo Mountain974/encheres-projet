@@ -34,7 +34,7 @@ public class EnchereController {
         }
     }
 
-    @PostMapping("/creer")
+    @PostMapping("/")
     public ResponseEntity<Void> ajouterEnchere(@RequestBody @Valid EnchereDTO enchereDTO) {
         enchereService.creerEnchere(enchereDTO);
         return  ResponseEntity.ok().build();

@@ -3,10 +3,8 @@ package fr.eni.encheres2.controller;
 import fr.eni.encheres2.dto.CategorieDTO;
 import fr.eni.encheres2.service.CategorieService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,58 +25,31 @@ public class CategorieController {
     }
 
     @GetMapping("/{noCategorie}")
-    public String afficherCategorieParNo(@PathVariable("noCategorie") @NotBlank Long noCategorie, Model model) {
-        model.addAttribute("categorie", categorieService.consulterCategorieParNo(noCategorie));
-        return "categorie";
-    }
-
-    @GetMapping("/nouvelleCategorie")
-    public String afficherFormulaireCreationCategorie(Model model) {
-        model.addAttribute("article", new CategorieDTO());
-        return "nouvelCategorie";
-    }
-
-    @PostMapping("/creer")
-    public String ajouterCategorie(@Valid CategorieDTO categorie, BindingResult bindingResult) {
-        categorieService.creerCategorie(categorie);
-
-        if (bindingResult.hasErrors()) {
-            return "creer";
+    public ResponseEntity<CategorieDTO> afficherEnchereParId(@PathVariable @NotNull Long noCategorie) {
+        CategorieDTO categorieDTO = categorieService.consulterCategorieParNo(noCategorie);
+        if (categorieDTO != null) {
+            return ResponseEntity.ok(categorieDTO);
+        } else {
+            return ResponseEntity.notFound().build();
         }
-        return "redirect:/categories";
     }
 
-    @GetMapping("/{noCategorie}/modifier")
-    public String getFilmEditForm(@PathVariable("noCategorie") Long noCategorie, Model model) {
-        model.addAttribute("categorie", categorieService.consulterCategorieParNo(noCategorie));
-
-        return "creer";
+    @PostMapping
+    public ResponseEntity<Void> ajouterCategorie(@RequestBody @Valid CategorieDTO categorieDTO) {
+        categorieService.creerCategorie(categorieDTO);
+        return  ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{noCategorie}/supprimer")
-    public String supprimerUneCategorie(@PathVariable Long noCategorie, Model model) {
-
-        CategorieDTO categorie = categorieService.consulterCategorieParNo(noCategorie);
-
-        model.addAttribute("message", "Êtes vous sur de vouloir supprimer la catégorie : " + categorie.getLibelle());
-        model.addAttribute("action", "/categories/" + noCategorie + "/supprimer");
-        model.addAttribute("back", "/categories");
-
-        // 2 - on redirige sur une page de confirmation ou l'utilisateur va devoir valider son choix
-        return "confirmation";
+    @PutMapping("/{noCategorie}")
+    public ResponseEntity<Void> modifierCategorie(@PathVariable Long noCategorie, @RequestBody CategorieDTO categorieDTO) {
+        categorieDTO.setNoCategorie(noCategorie);
+        categorieService.modifierCategorie(categorieDTO);
+        return ResponseEntity.ok().build();
     }
 
-    /**
-     * Est appelé lorsqu'on a validé dans le template "confirmation" qu'on souhaite effectuer la suppression de la catégorie
-     * Je vais recupérer un no en paramètre d'url
-     */
-    @PostMapping("/{noCategorie}/supprimer")
-    public String supprimerFilm(@PathVariable Long noCategorie) {
-
+    @DeleteMapping("/{noCategorie}")
+    public ResponseEntity<Void> supprimerCategorie(@PathVariable Long noCategorie) {
         categorieService.supprimerCategorie(noCategorie);
-
-        return "redirect:/";
+        return ResponseEntity.ok().build();
     }
-
-
 }
