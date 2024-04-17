@@ -14,7 +14,7 @@ public class CategorieDTO {
     private Long noCategorie;
 
     @NotNull(message = "le libellé de la catégorie est obligatoire")
-    @Size(max=30)
+    @Size(max = 30)
     private String libelle;
 
     public CategorieDTO(Long noCategorie, String libelle) {

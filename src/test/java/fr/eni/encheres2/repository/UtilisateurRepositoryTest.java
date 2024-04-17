@@ -42,7 +42,7 @@ class UtilisateurRepositoryTest {
         Utilisateur user = Utilisateur.builder().noUtilisateur(123).nom("Bombeurre").prenom("Jean").build();
         when(utilisateurRepository.findById(123L)).thenReturn(Optional.ofNullable(user));
 
-        UtilisateurDTO result = utilisateurService.trouverUtilisateur(123L);
+        UtilisateurDTO result = utilisateurService.trouverUtilisateurParId(123L);
 
         assertEquals("Bombeurre", result.getNom());
     }

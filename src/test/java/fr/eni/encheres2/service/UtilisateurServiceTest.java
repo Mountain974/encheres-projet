@@ -13,7 +13,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class UtilisateurServiceTest {
@@ -43,13 +43,13 @@ public class UtilisateurServiceTest {
     }
 
     @Test
-    void testTrouverUtilisateur() {
+    void testTrouverUtilisateurParId() {
         long userId = 1L;
         Utilisateur utilisateur = Utilisateur.builder().noUtilisateur(userId).nom("Bombeurre").prenom("Jean").build();
 
         when(utilisateurRepository.findById(userId)).thenReturn(java.util.Optional.of(utilisateur));
 
-        UtilisateurDTO userDTO = utilisateurService.trouverUtilisateur(userId);
+        UtilisateurDTO userDTO = utilisateurService.trouverUtilisateurParId(userId);
 
         verify(utilisateurRepository, times(1)).findById(userId);
         assertEquals("Bombeurre", userDTO.getNom());

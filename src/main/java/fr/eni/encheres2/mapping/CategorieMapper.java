@@ -13,10 +13,12 @@ public class CategorieMapper extends CustomModelMapper implements Mapper<Categor
         super();
         this.modelMapper = modelMapper;
     }
+
     @Override
     public Categorie mapToEntity(CategorieDTO dto) {
         return modelMapper.map(dto, Categorie.class);
     }
+
     @Override
     public CategorieDTO mapToDto(Categorie entity) {
         return modelMapper.map(entity, CategorieDTO.class);
