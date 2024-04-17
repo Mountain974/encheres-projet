@@ -12,7 +12,7 @@ function MesVentes() {
             .then(response => response.json())
     })
 
-    if (mesArticles.isPending || cat.isLoading) {
+    if (mesArticles.isPending || mesArticles.isLoading) {
         return <div>loading</div>
     }
     if (mesArticles.error) {
@@ -20,7 +20,9 @@ function MesVentes() {
     }
 
     return (
-        <Encheres articles={mesArticles} isConnected={isConnected}/>
+        <>
+            <Encheres articles={mesArticles} isConnected={isConnected}/>
+        </>
     )
 }
 

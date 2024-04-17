@@ -2,9 +2,8 @@ import React from "react";
 import {useQuery} from "@tanstack/react-query";
 import {UnArticle} from "./UnArticle.jsx";
 import PropTypes from "prop-types";
-import {Enchere} from "./Enchere.jsx";
 
-export const Encheres = ({articles, isConnected}) => {
+export const Encheres = ({articles, retraits, isConnected}) => {
     const categories = useQuery({
         queryKey:["categories"],
         queryFn: () => fetch("./api/categories")
@@ -17,6 +16,9 @@ export const Encheres = ({articles, isConnected}) => {
     }
     if (categories.error) {
         return <div>error</div>
+    }
+    const trouverRetrait = (idArticle) => {
+        return retraits.find(retrait => retrait.id === idArticle)
     }
 
     return (
@@ -135,7 +137,7 @@ export const Encheres = ({articles, isConnected}) => {
                     </div>
                 </form>
                 <div className="row mx-auto d-flex justify-content-between">
-                    {articles.map((article, index) => <UnArticle article={article} index={index}/>)}
+                    {articles.map((article, index) => <UnArticle article={article} retrait={() => trouverRetrait(article.id)} index={index}/>)}
                 </div>
             </div>
         </>

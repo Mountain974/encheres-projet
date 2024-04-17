@@ -16,17 +16,17 @@ export const Header = ({isConnected}) => {
                 {isConnected ?
                     <>
                         <div className="text-lg-center text-left px-4">
-                            <a className="fs-5" href="/">Enchères</a>
+                            <a className="fs-5" href="/home">Enchères</a>
                         </div>
 
 
                         <div className="text-lg-center text-left px-4">
-                            <a className="fs-5" href="/">Vendre un article</a>
+                            <a className="fs-5" href="/vendre-un-article">Vendre un article</a>
                         </div>
 
 
                         <div className="text-lg-center text-left px-4">
-                            <a className="fs-5" href="/">Mon profil</a>
+                            <a className="fs-5" href="/mon-profil">Mon profil</a>
                         </div>
 
 
@@ -37,12 +37,12 @@ export const Header = ({isConnected}) => {
                 :
                     <>
                         <div className="d-flex align-items-center col-md-3 ms-4">
-                            <a className="text-center fs-5" href="/">S'inscrire</a>
+                            <a className="text-center fs-5" href="/creer-compte">S'inscrire</a>
                         </div>
 
 
                         <div className="d-flex align-items-center col-md-3 ms-4">
-                            <a className="text-center fs-5" style={{whiteSpace: "nowrap"}} href="/">Se connecter</a>
+                            <a className="text-center fs-5" style={{whiteSpace: "nowrap"}} href="/connection">Se connecter</a>
                         </div>
                     </>
                 }

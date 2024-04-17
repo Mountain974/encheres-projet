@@ -11,7 +11,7 @@ export const MonProfil = () => {
             .then(response => response.json())
     })
 
-    if (utilisateur.isPending || cat.isLoading) {
+    if (utilisateur.isPending || utilisateur.isLoading) {
         return <div>loading</div>
     }
     if (utilisateur.error) {
