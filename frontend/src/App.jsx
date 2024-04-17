@@ -27,7 +27,7 @@ export const App = () => {
             <Routes>
                 <Route
                     path="/"
-                    element={<Layout title="home" header={<Header isConnected={isConnected} />} main={<Categories/>} />}
+                    element={<Layout title="home" header={<Header isConnected={isConnected} />} main={<Home isConnected />} />}
                 />
                 <Route
                     path="/connection"

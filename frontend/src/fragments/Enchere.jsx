@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const Enchere = ({isEncherir, isDetailMaVente, isAcquerir, enchere}) => {
-const {dateEnchere, montantEnchere, acheteur, article} = enchere
+
 return (
 
     <form className="d-none d-md-block">
@@ -17,7 +17,7 @@ return (
                 <div className="row form-group d-flex justify-content-center">
 
                     <div className="row d-flex align-items-center mb-3 p-0">
-                        <h2>{article.nom}</h2>
+                        <h2>{enchere.article.nom}</h2>
                     </div>
 
                     <div className="row mb-3 p-0">
@@ -25,7 +25,7 @@ return (
                             <label className="fs-5">Description :</label>
                         </div>
                         <div className="col-8">
-                            <p className="fs-5" style={{ height: "4rem", width: "50rem" }}>{article.description}</p>
+                            <p className="fs-5" style={{ height: "4rem", width: "50rem" }}>{enchere.article.description}</p>
                         </div>
                     </div>
 
@@ -36,7 +36,7 @@ return (
                                 <label className="fs-5">Catégorie :</label>
                             </div>
                             <div className="col-8">
-                                <p className="fs-5">{article.categorie.libelle}</p>
+                                <p className="fs-5">{enchere.article.categorie.libelle}</p>
                             </div>
                         </div>
                     }
@@ -47,7 +47,7 @@ return (
                         </div>
                         <div className="col-8">
                             <p style={{display: "inline"}} className="fs-5">{montantEnchere}</p><p style={{display: "inline"}} className="fs-5">pts</p>
-                            <p style={{display: "inline"}} className="fs-5"> par </p><p style={{display: "inline"}} className="fs-5">{acheteur.pseudo}</p>
+                            <p style={{display: "inline"}} className="fs-5"> par </p><p style={{display: "inline"}} className="fs-5">{enchere.acheteur.pseudo}</p>
                         </div>
                     </div>
 
@@ -56,7 +56,7 @@ return (
                             <label className="fs-5">Mise à prix :</label>
                         </div>
                         <div className="col-8">
-                            <p className="fs-5">{article.miseAPrix}</p>
+                            <p className="fs-5">{enchere.article.miseAPrix}</p>
                         </div>
                     </div>
 
@@ -66,7 +66,7 @@ return (
                                 <label className="fs-5">Fin de l'enchère :</label>
                             </div>
                             <div className="col-8">
-                                <p className="fs-5">{article.dateFinEnchere}</p>
+                                <p className="fs-5">{enchere.article.dateFinEnchere}</p>
                             </div>
                         </div>
                     }
@@ -77,9 +77,9 @@ return (
                             <label className="fs-5">Retrait :</label>
                         </div>
                         <div className="col-8">
-                            <p className="fs-5">{article.retrait.rue}</p>
-                            <p className="fs-5">{article.retrait.codePostal}</p>
-                            <p className="fs-5">{article.retrait.ville}</p>
+                            <p className="fs-5">{enchere.article.retrait.rue}</p>
+                            <p className="fs-5">{enchere.article.retrait.codePostal}</p>
+                            <p className="fs-5">{enchere.article.retrait.ville}</p>
                         </div>
                     </div>
 
@@ -89,7 +89,7 @@ return (
                             <label className="fs-5">Vendeur :</label>
                         </div>
                         <div className="col-8">
-                            <p className="fs-5">{article.vendeur.pseudo}</p>
+                            <p className="fs-5">{enchere.article.vendeur.pseudo}</p>
                         </div>
                     </div>
 

@@ -12,6 +12,12 @@ function Home(isConnected) {
             .then(response => response.json())
     })
 
+    const retraits = useQuery({
+        queryKey:["retraits"],
+        queryFn: () => fetch("./api/retraits")
+            .then(response => response.json())
+    })
+
     if (articlesEnCours.isPending || articlesEnCours.isLoading) {
         return <div>loading</div>
     }
@@ -21,7 +27,7 @@ function Home(isConnected) {
 
     return (
         <>
-            <Encheres articles={articlesEnCours.data} isConnected={isConnected}/>
+            <Encheres articles={articlesEnCours.data} retraits={retraits.data} isConnected={isConnected}/>
         </>
 
     )
