@@ -12,10 +12,10 @@ export const Encheres = ({articles, isConnected}) => {
     })
 
 
-    if (cat.isPending || cat.isLoading) {
+    if (categories.isPending || categories.isLoading) {
         return <div>loading</div>
     }
-    if (cat.error) {
+    if (categories.error) {
         return <div>error</div>
     }
 

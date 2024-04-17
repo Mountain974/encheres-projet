@@ -12,7 +12,7 @@ function Home(isConnected) {
             .then(response => response.json())
     })
 
-    if (articlesEnCours.isPending || cat.isLoading) {
+    if (articlesEnCours.isPending || articlesEnCours.isLoading) {
         return <div>loading</div>
     }
     if (articlesEnCours.error) {
@@ -20,7 +20,10 @@ function Home(isConnected) {
     }
 
     return (
-        <Encheres articles={articlesEnCours.data} isConnected={isConnected}/>
+        <>
+            <Encheres articles={articlesEnCours.data} isConnected={isConnected}/>
+        </>
+
     )
 }
 
