@@ -46,10 +46,12 @@ public class Utilisateur {
     private String telephone;
     @NotNull(message = "La rue est obligatoire")
     private String rue;
+
     @NotNull(message = "Le code postal est obligatoire")
     @Size(min = 5, max = 5)
     @Column(name = "code_postal", length = 5, nullable = false)
     private String codePostal;
+
     @NotNull(message = "La ville est obligatoire")
     @Size(min = 1, max = 41)
     @Column(length = 41, nullable = false)

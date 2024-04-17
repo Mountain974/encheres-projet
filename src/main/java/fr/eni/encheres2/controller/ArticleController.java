@@ -2,7 +2,6 @@ package fr.eni.encheres2.controller;
 
 import fr.eni.encheres2.dto.ArticleDTO;
 import fr.eni.encheres2.service.ArticleService;
-import fr.eni.encheres2.service.RetraitService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +12,9 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
-    private final RetraitService retraitService;
 
-    public ArticleController(ArticleService articleService, RetraitService retraitService) {
+    public ArticleController(ArticleService articleService) {
         this.articleService = articleService;
-        this.retraitService = retraitService;
     }
 
     @GetMapping

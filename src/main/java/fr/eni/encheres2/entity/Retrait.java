@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Data // génère getter/setter/
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "RETRAITS")
@@ -21,15 +21,16 @@ public class Retrait {
     @Column(length = 50, nullable = false)
     @Size(max=50)
     private String rue;
+
     @NotNull(message = "le code postal est obligatoire")
     @Column(name = "code_postal", length = 5, nullable = false)
     @Size(min=5, max=5)
     private String codePostal;
+
     @NotNull(message = "la ville est obligatoire")
     @Column(length = 45, nullable = false)
     @Size(max=45)
     private String ville;
-
 
 
 }
