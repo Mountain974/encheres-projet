@@ -12,6 +12,8 @@ public interface UtilisateurService {
 
     UtilisateurDTO trouverUtilisateurParId(long id);
 
+    UtilisateurDTO trouverUtilisateurParPseudo (String pseudo);
+
     UtilisateurDTO trouverUtilisateurParEmail(String email);
 
     void modifierUtilisateur(UtilisateurDTO utilisateurDTO);

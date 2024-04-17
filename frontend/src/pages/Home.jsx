@@ -27,7 +27,7 @@ function Home(isConnected) {
 
     return (
         <>
-            <Encheres articles={articlesEnCours.data} retraits={retraits.data} isConnected={isConnected}/>
+            <Encheres articles={articlesEnCours.data} retraits={retraits.data} isConnected />
         </>
 
     )

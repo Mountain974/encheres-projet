@@ -1,6 +1,7 @@
 import React from "react";
 
 export const Compte = ({utilisateur, isEdit}) => {
+    console.log(utilisateur)
     return (
         <div className="row d-flex justify-content-center mt-5">
                 <div className="col-md-5 offset-md-7 mx-auto">

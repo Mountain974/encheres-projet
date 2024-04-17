@@ -14,7 +14,6 @@ import {EncheresNonCommencees} from "./pages/EncheresNonCommencees.jsx";
 import {DetailVente} from "./pages/DetailVente.jsx"
 import MesVentes from "./pages/MesVentes.jsx";
 import './App.css'
-import Categories from "./Categories.jsx";
 
 
 
@@ -46,7 +45,7 @@ export const App = () => {
                     element={<Layout title="connection" header={<Header isConnected={isConnected} />} main={<MesVentes />} />}
                 />
                 <Route
-                    path="/profil"
+                    path="/profil/:pseudo"
                     element={<Layout title="Profil" header={<Header isConnected={isConnected} />} main={<Profil />} />}
                 />
                 <Route

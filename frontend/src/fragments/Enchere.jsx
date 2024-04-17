@@ -162,7 +162,7 @@ return (
 )
 }
 
-Enchere.PropTypes = {
+Enchere.propTypes = {
     isEncherir: PropTypes.bool,
     isDetailMaVente: PropTypes.bool,
     isAcquerir: PropTypes.bool,

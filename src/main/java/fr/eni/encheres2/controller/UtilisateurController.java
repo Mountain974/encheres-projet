@@ -42,6 +42,16 @@ public class UtilisateurController {
         }
     }
 
+    @GetMapping("/{pseudo}")
+    public ResponseEntity<UtilisateurDTO> afficherUnUtilisateurAvecSonPSeudo(@PathVariable String pseudo) {
+        UtilisateurDTO userDTO = utilisateurService.trouverUtilisateurParPseudo(pseudo);
+        if (userDTO != null) {
+            return ResponseEntity.ok(userDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<Void> creerUtilisateur(@RequestBody UtilisateurDTO userDTO) {
         utilisateurService.creerUtilisateur(userDTO);

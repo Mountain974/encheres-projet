@@ -1,18 +1,32 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+import {useQuery} from "@tanstack/react-query";
 
-export const Profil = (isMonProfil, utilisateur) => {
+export const Profil = () => {
 
-    if (typeof utilisateur === undefined) {
+    const [utilisateur, setUtilisateur] = useState()
 
-    }
+    const {pseudo} = useParams()
+    console.log(pseudo)
+
+    useEffect(() => {
+        fetch(`./api/utilisateurs/${pseudo}`)
+            .then(response => response.json())
+            .then(data => {
+                setUtilisateur(data);
+            })
+            .catch(error => console.error('Erreur lors de la récupération des données d\'utilisateur :', error));
+    }, [pseudo]);
+
+    console.log(utilisateur)
+
 
     return (
         <>
             <div className="container-fluid">
                 <div className="row title d-flex justify-content-center mb-4">
                     <div className="col-auto mt-5">
-                        <h1 className="text-white text-center py-3">{isMonProfil ? "Mon profil" : "Profil"}</h1>
+                        <h1 className="text-white text-center py-3">Profil</h1>
                     </div>
                 </div>
             </div>
@@ -100,12 +114,3 @@ export const Profil = (isMonProfil, utilisateur) => {
     )
 }
 
-Profil.PropTypes = ({
-    isMonProfil: PropTypes.bool,
-    utilisateur: PropTypes.shape({})
-})
-
-Profil.defaultProps = {
-    isMonProfil : false,
-    utilisateur: undefined,
-}

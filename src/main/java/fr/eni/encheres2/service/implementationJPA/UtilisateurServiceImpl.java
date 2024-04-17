@@ -42,6 +42,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
+    public UtilisateurDTO trouverUtilisateurParPseudo(String pseudo) {
+        Utilisateur utilisateur = utilisateurRepository.findByPseudo(pseudo)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "L'utilisateur n'existe pas."));
+        return modelMapper.map(utilisateur, UtilisateurDTO.class);
+    }
+
+    @Override
     public UtilisateurDTO trouverUtilisateurParEmail(String email) {
         Utilisateur utilisateur = utilisateurRepository.findByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "L'utilisateur n'existe pas."));

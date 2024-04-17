@@ -58,7 +58,7 @@ export const Encheres = ({articles, retraits, isConnected}) => {
                                 <div className="col-8 p-0">
                                     <div className="col-8">
                                         <select value="categorie" className="dropdown w-100">
-                                            {categories.data.map((cat, index) => <option key={index}
+                                            {categories.data.map((cat, index) => <option key={`cat-${index}`}
                                                                                         value={cat.libelle}>{cat.libelle}</option>)}
                                         </select>
                                     </div>
@@ -137,15 +137,15 @@ export const Encheres = ({articles, retraits, isConnected}) => {
                     </div>
                 </form>
                 <div className="row mx-auto d-flex justify-content-between">
-                    {articles.map((article, index) => <UnArticle article={article} retrait={() => trouverRetrait(article.id)} index={index}/>)}
+                    {articles.map((article, index) => <UnArticle key={`art-${index}`} article={article} retrait={() => trouverRetrait(article.id)}  isConnected={isConnected}/>)}
                 </div>
             </div>
         </>
     )
 }
 
-Encheres.PropTypes= ({
-    articles: PropTypes.shape({}),
+Encheres.propTypes= ({
+    articles: PropTypes.array,
     isConnected: PropTypes.bool
 })
 
