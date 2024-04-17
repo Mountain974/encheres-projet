@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data // génère getter/setter/
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "RETRAITS")
 public class Retrait {
     @Id
     @Column(name = "no_article")

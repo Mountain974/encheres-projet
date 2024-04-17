@@ -9,12 +9,11 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@Table(name = "ARTICLES")
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +21,11 @@ public class Article {
     private Long noArticle;
     @Column(name = "nom_article", length = 30, nullable = false)
     @NotNull(message = "le nom de l'article est obligatoire")
-    @Size(max=30)
+    @Size(max = 30)
     private String nom;
     @NotNull(message = "la description est obligatoire")
     @Column(length = 300, nullable = false)
-    @Size(min=10, max=300)
+    @Size(min = 10, max = 300)
     private String description;
     @Column(name = "date_debut_encheres", nullable = false)
     @NotNull(message = "la date de début des enchères est obligatoire")

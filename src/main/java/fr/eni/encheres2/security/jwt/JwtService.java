@@ -1,6 +1,6 @@
 package fr.eni.encheres2.security.jwt;
 
-import fr.eni.encheres2.security.userInfo.UserInfo;
+import fr.eni.encheres2.entity.Utilisateur;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -31,7 +31,7 @@ public class JwtService {
 
     public String generateJwtToken(Authentication authentication) {
 
-        UserInfo userPrincipal = (UserInfo) authentication.getPrincipal();
+        Utilisateur userPrincipal = (Utilisateur) authentication.getPrincipal();
 
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))

@@ -7,6 +7,10 @@ function App() {
   const [listCategories, setListCategories] = useState([])
 
   useEffect(() => {
+      console.log('listCategories = ', listCategories);
+      })
+
+  useEffect(() => {
 	  fetch("./api/categories")
 	  .then(response => response.json())
 	  .then(data => setListCategories(data));
