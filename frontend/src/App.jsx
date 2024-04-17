@@ -3,7 +3,6 @@ import Layout from "./fragments/Layout.jsx"
 import {Header} from "./fragments/Header.jsx";
 import {Encherir} from "./pages/Encherir.jsx";
 import Home from "./pages/Home.jsx";
-import './App.css'
 import {Profil} from "./fragments/Profil.jsx";
 import {MonProfil} from "./pages/MonProfil.jsx";
 import {CreerCompte} from "./pages/CreerCompte.jsx";
@@ -14,6 +13,8 @@ import {VendreUnArticle} from "./pages/VendreUnArticle.jsx";
 import {EncheresNonCommencees} from "./pages/EncheresNonCommencees.jsx";
 import {DetailVente} from "./pages/DetailVente.jsx"
 import MesVentes from "./pages/MesVentes.jsx";
+import './App.css'
+
 
 
 

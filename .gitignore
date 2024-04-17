@@ -6,7 +6,10 @@ gradlew.bat
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
+src/main/resources/static/assets/index-**
 !**/src/test/**/build/
+initBDD.sql
+
 
 ### STS ###
 .apt_generated
