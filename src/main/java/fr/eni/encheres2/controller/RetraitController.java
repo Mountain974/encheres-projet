@@ -1,11 +1,14 @@
 package fr.eni.encheres2.controller;
 
 import fr.eni.encheres2.dto.RetraitDTO;
+import fr.eni.encheres2.dto.UtilisateurDTO;
 import fr.eni.encheres2.service.RetraitService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/retraits")
@@ -15,6 +18,11 @@ public class RetraitController {
 
     public RetraitController(RetraitService retraitService){
         this.retraitService = retraitService;
+    }
+
+    @GetMapping
+    public List<RetraitDTO> afficherRetraits() {
+        return retraitService.consulterRetraits();
     }
 
     @GetMapping("/{noArticle}")
