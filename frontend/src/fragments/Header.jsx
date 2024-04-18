@@ -2,7 +2,7 @@ import React from "react";
 export const Header = ({isConnected}) => {
     return (
         <div id="header3" >
-            <nav className="navbar navbar-expend-lg bg-body-tertiary">
+            <nav className="navbar navbar-expend-lg bg-body-tertiary p-3">
 
 
                 <div className="col-12 col-md-4">

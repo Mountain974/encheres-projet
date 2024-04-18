@@ -10,8 +10,8 @@ export const Profil = (isMonProfil, utilisateur) => {
     return (
         <>
             <div className="container-fluid">
-                <div className="row title d-flex justify-content-center mb-4">
-                    <div className="col-auto mt-5">
+                <div className="row title d-flex justify-content-center mb-4 shadow-lg p-3 mb-5">
+                    <div className="col-auto">
                         <h1 className="text-white text-center py-3">{isMonProfil ? "Mon profil" : "Profil"}</h1>
                     </div>
                 </div>
@@ -19,11 +19,11 @@ export const Profil = (isMonProfil, utilisateur) => {
 
             <div className="container mt-5">
                 <div className="row d-flex justify-content-center">
-                    <div className="col-md-5 offset-md-7 mx-auto">
+                    <div className="col-md-7 offset-md-5 mx-auto">
 
                         <div className="row form-group pb-4 mx-auto d-flex align-items-center">
                             <div className="col-4 offset-8 mx-auto">
-                                Pseudo :
+                                <p><strong>Pseudo : </strong></p>
                             </div>
                             <div className="col-7 offest-5 mx-auto">
                                 {utilisateur.pseudo}
@@ -33,7 +33,7 @@ export const Profil = (isMonProfil, utilisateur) => {
 
                         <div className="row form-group pb-4 mx-auto d-flex align-items-center">
                             <div className="col-4 offset-8 mx-auto">
-                                Nom :
+                                <p><strong>Nom : </strong></p>
                             </div>
                             <div className="col-7 offest-5 mx-auto">
                                 {utilisateur.nom}
@@ -42,7 +42,7 @@ export const Profil = (isMonProfil, utilisateur) => {
 
                         <div className="row form-group pb-4 mx-auto d-flex align-items-center">
                             <div className="col-4 offset-8 mx-auto">
-                                Prénom :
+                                <p><strong>Prénom : </strong></p>
                             </div>
                             <div className="col-7 offest-5 mx-auto">
                                 {utilisateur.prenom}
@@ -51,7 +51,7 @@ export const Profil = (isMonProfil, utilisateur) => {
 
                         <div className="row form-group pb-4 mx-auto d-flex align-items-center">
                             <div className="col-4 offset-8 mx-auto">
-                                Email :
+                                <p><strong>Email : </strong></p>
                             </div>
                             <div className="col-7 offest-5 mx-auto">
                                 {utilisateur.email}
@@ -60,7 +60,7 @@ export const Profil = (isMonProfil, utilisateur) => {
 
                         <div className="row form-group pb-4 mx-auto d-flex align-items-center">
                             <div className="col-4 offset-8 mx-auto">
-                                Téléphone :
+                                <p><strong>Téléphone : </strong></p>
                             </div>
                             <div className="col-7 offest-5 mx-auto">
                                 {utilisateur.telephone}
@@ -69,7 +69,7 @@ export const Profil = (isMonProfil, utilisateur) => {
 
                         <div className="row form-group pb-4 mx-auto d-flex align-items-center">
                             <div className="col-4 offset-8 mx-auto">
-                                Rue :
+                                <p><strong>Rue : </strong></p>
                             </div>
                             <div className="col-7 offest-5 mx-auto">
                                 {utilisateur.rue}
@@ -78,7 +78,7 @@ export const Profil = (isMonProfil, utilisateur) => {
 
                         <div className="row form-group pb-4 mx-auto d-flex align-items-center">
                             <div className="col-4 offset-8 mx-auto">
-                                Code postal :
+                                <p><strong>Code postal : </strong></p>
                             </div>
                             <div className="col-7 offest-5 mx-auto">
                                 {utilisateur.codePostal}
@@ -87,7 +87,7 @@ export const Profil = (isMonProfil, utilisateur) => {
 
                         <div className="row form-group pb-4 mx-auto d-flex align-items-center">
                             <div className="col-4 offset-8 mx-auto">
-                                Ville :
+                                <p><strong>Ville : </strong></p>
                             </div>
                             <div className="col-7 offest-5 mx-auto">
                                 {utilisateur.ville}
