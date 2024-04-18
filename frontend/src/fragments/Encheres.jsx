@@ -42,15 +42,20 @@ export const Encheres = ({articles, retraits, isConnected}) => {
 
                             <div className="d-none d-md-block">
                                 <div className="row d-flex justify-content-center mx-5 mb-5">
-                                    <input required type="text" className="form-control"
-                                           placeholder="Le nom de l'article contient" value="search" name="search"
-                                           id="search"/>
+                                    <div className="col-auto">
+                                        <i className="fa-solid fa-magnifying-glass fa-2x"></i>
+                                    </div>
+                                    <div className="col p-0">
+                                        <input required type="text" className="form-control"
+                                               placeholder="Le nom de l'article contient" value="search" name="search"
+                                               id="search"/>
+                                    </div>
                                 </div>
                             </div>
 
                             <div className="row d-flex align-items-center mx-5">
                                 <div className="col-4">
-                                    <label className="fs-5">Catégorie :</label>
+                                <label className="fs-5">Catégorie :</label>
                                 </div>
                                 <div className="col-8 p-0">
                                     <div className="col-8">

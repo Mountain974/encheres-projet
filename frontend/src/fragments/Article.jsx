@@ -20,12 +20,13 @@ export const Article = ({vendeur, article, isExist}) => {
     return (
         <div className="container mt-5">
 
-            <form className="d-none d-md-block">
+            <form>
 
                     <div className="row mx-auto mb-4">
 
                         <div className="col-5 mb-3 d-flex justify-content-center">
-                            <img className="w-75" style={{height: "200px"}} alt={`photo de : ${article.nom}`}/>
+                            <img className="img-fluid" alt={`photo de : ${article.nom}`}/><i
+                            className="fa-solid fa-camera fa-5x"></i>
                         </div>
 
                         <div className="col-md-7 mb-4 d-flex justify-content-center align-items-center">
@@ -71,7 +72,7 @@ export const Article = ({vendeur, article, isExist}) => {
                                     </div>
                                     <div className="col-8 d-flex justify-content-start">
                                         <a href="/chemin/vers/votre/fichier.pdf" download>
-                                            <button className="form-control btn btn-primary"
+                                            <button className="form-control btn btn-secondary btn-lg"
                                                     style={{width: "235px"}}>Télécharger
                                             </button>
                                         </a>

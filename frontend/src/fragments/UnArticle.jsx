@@ -6,11 +6,9 @@ export const UnArticle = ({article, retrait, index}) => {
 
     return (
         <div key={index} className="col-md-5 offset-md-1 mb-4 border border-secondary m-0">
-            <div className="row align-items-center">
-                <div className="col-4">
-                    <div className="img-fluid">
-                        <img alt="photo article" />
-                    </div>
+            <div className="row d-flex align-items-center justify-content-center">
+                <div className="col-4 d-flex align-items-center justify-content-center">
+                       <i className="fa-solid fa-camera fa-5x"></i>
                 </div>
                 <div className="col-8 ps-md-3">
                     <h5 style={{textDecoration: "underline"}}>{article.nom}</h5>
