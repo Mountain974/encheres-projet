@@ -42,7 +42,7 @@ public class UtilisateurController {
         }
     }
 
-    @GetMapping("/{pseudo}")
+    @GetMapping("/pseudo/{pseudo}")
     public ResponseEntity<UtilisateurDTO> afficherUnUtilisateurAvecSonPSeudo(@PathVariable String pseudo) {
         UtilisateurDTO userDTO = utilisateurService.trouverUtilisateurParPseudo(pseudo);
         if (userDTO != null) {

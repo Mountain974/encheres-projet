@@ -4,26 +4,23 @@ import {useQuery} from "@tanstack/react-query";
 
 export const Profil = () => {
 
-    const [utilisateur, setUtilisateur] = useState()
-
     const {pseudo} = useParams()
     console.log(pseudo)
+    const utilisateur = useQuery({
+        queryKey:["utilisateur"],
+        queryFn: () => fetch(`/api/utilisateurs/pseudo/${pseudo}`)
+            .then(response => response.json())
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`/api/utilisateurs/${pseudo}`);
-                const data = await response.json();
-                setUtilisateur(data);
-            } catch (error) {
-                console.error('Erreur lors de la récupération des données d\'utilisateur :', error);
-            }
-        };
+    })
 
-        fetchData();
-    }, [pseudo]);
+    if (utilisateur.isPending || utilisateur.isLoading) {
+        return <div>loading</div>
+    }
+    if (utilisateur.error) {
+        return <div>erreur : l'utilisateur n'existe pas</div>
+    }
 
-    console.log(utilisateur)
+    console.log(utilisateur.data)
 
 
     return (
@@ -45,7 +42,7 @@ export const Profil = () => {
                                 Pseudo :
                             </div>
                             <div className="col-7 offest-5 mx-auto">
-                                {utilisateur.pseudo}
+                                {utilisateur.data.pseudo}
                             </div>
                         </div>
 
@@ -55,7 +52,7 @@ export const Profil = () => {
                                 Nom :
                             </div>
                             <div className="col-7 offest-5 mx-auto">
-                                {utilisateur.nom}
+                                {utilisateur.data.nom}
                             </div>
                         </div>
 
@@ -64,7 +61,7 @@ export const Profil = () => {
                                 Prénom :
                             </div>
                             <div className="col-7 offest-5 mx-auto">
-                                {utilisateur.prenom}
+                                {utilisateur.data.prenom}
                             </div>
                         </div>
 
@@ -73,7 +70,7 @@ export const Profil = () => {
                                 Email :
                             </div>
                             <div className="col-7 offest-5 mx-auto">
-                                {utilisateur.email}
+                                {utilisateur.data.email}
                             </div>
                         </div>
 
@@ -82,7 +79,7 @@ export const Profil = () => {
                                 Téléphone :
                             </div>
                             <div className="col-7 offest-5 mx-auto">
-                                {utilisateur.telephone}
+                                {utilisateur.data.telephone}
                             </div>
                         </div>
 
@@ -91,7 +88,7 @@ export const Profil = () => {
                                 Rue :
                             </div>
                             <div className="col-7 offest-5 mx-auto">
-                                {utilisateur.rue}
+                                {utilisateur.data.rue}
                             </div>
                         </div>
 
@@ -100,7 +97,7 @@ export const Profil = () => {
                                 Code postal :
                             </div>
                             <div className="col-7 offest-5 mx-auto">
-                                {utilisateur.codePostal}
+                                {utilisateur.data.codePostal}
                             </div>
                         </div>
 
@@ -109,7 +106,7 @@ export const Profil = () => {
                                 Ville :
                             </div>
                             <div className="col-7 offest-5 mx-auto">
-                                {utilisateur.ville}
+                                {utilisateur.data.ville}
                             </div>
                         </div>
                     </div>

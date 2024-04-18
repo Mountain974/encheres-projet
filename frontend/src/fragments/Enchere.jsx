@@ -11,7 +11,6 @@ export const Enchere = ({isEncherir, isDetailMaVente, isAcquerir, article, retra
             .then(response => response.json())
 
     })
-    console.log(meilleureEnchere.data)
 
     if (meilleureEnchere.isPending || meilleureEnchere.isLoading) {
         return <div>loading</div>

@@ -2,7 +2,6 @@ import React from "react";
 
 export const UnArticle = ({article, retrait, isConnected}) => {
 
-    console.log("Retrait (UnArticle)", retrait);
 
     return (
         <div className="col-md-5 offset-md-1 mb-4 border border-secondary m-0">
