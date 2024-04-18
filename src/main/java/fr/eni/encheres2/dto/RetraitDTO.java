@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@Data // génère getter/setter/
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class RetraitDTO {
@@ -19,11 +19,9 @@ public class RetraitDTO {
     private String rue;
     @NotNull(message = "le code postal est obligatoire")
     @Size(min=5, max=5)
-    private String code_postal;
+    private String codePostal;
     @NotNull(message = "la ville est obligatoire")
     @Size(max=45)
     private String ville;
-
-
 
 }

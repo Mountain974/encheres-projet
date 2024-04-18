@@ -10,15 +10,14 @@ export const Encheres = ({articles, retraits, isConnected}) => {
             .then(response => response.json())
     })
 
-
     if (categories.isPending || categories.isLoading) {
         return <div>loading</div>
     }
     if (categories.error) {
         return <div>error</div>
     }
-    const trouverRetrait = (idArticle) => {
-        return retraits.find(retrait => retrait.id === idArticle)
+    const trouverRetrait = (noArticle) => {
+        return retraits.find(retrait => retrait.noArticle === noArticle)
     }
 
     return (
@@ -137,7 +136,7 @@ export const Encheres = ({articles, retraits, isConnected}) => {
                     </div>
                 </form>
                 <div className="row mx-auto d-flex justify-content-between">
-                    {articles.map((article, index) => <UnArticle key={`art-${index}`} article={article} retrait={() => trouverRetrait(article.id)}  isConnected={isConnected}/>)}
+                    {articles.map((article, index) => <UnArticle article={article} retrait={trouverRetrait(article.noArticle)} index={index}/>)}
                 </div>
             </div>
         </>
