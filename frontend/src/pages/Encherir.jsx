@@ -14,13 +14,6 @@ export const Encherir = () => {
 
     })
 
-    if (article.isPending || article.isLoading) {
-        return <div>loading</div>
-    }
-    if (article.error) {
-        return <div>erreur : l'article n'existe pas</div>
-    }
-
     const retrait = useQuery({
         queryKey:["retrait"],
         queryFn: () => fetch(`/api/retraits/${noArticle}`)
@@ -28,8 +21,11 @@ export const Encherir = () => {
 
     })
 
-    if (retrait.isPending || retrait.isLoading) {
+    if (article.isPending || article.isLoading || retrait.isPending || retrait.isLoading) {
         return <div>loading</div>
+    }
+    if (article.error) {
+        return <div>erreur : l'article n'existe pas</div>
     }
     if (retrait.error) {
         return <div>erreur : l'article n'a pas d'adresse</div>
