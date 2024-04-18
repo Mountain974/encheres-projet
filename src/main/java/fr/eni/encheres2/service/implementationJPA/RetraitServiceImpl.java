@@ -1,5 +1,6 @@
 package fr.eni.encheres2.service.implementationJPA;
 
+import fr.eni.encheres2.dto.CategorieDTO;
 import fr.eni.encheres2.dto.RetraitDTO;
 import fr.eni.encheres2.mapping.RetraitMapper;
 import fr.eni.encheres2.entity.Retrait;
@@ -12,6 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class RetraitServiceImpl implements RetraitService {
     private final RetraitMapper modelMapper;
@@ -21,6 +25,12 @@ public class RetraitServiceImpl implements RetraitService {
     public RetraitServiceImpl(RetraitMapper modelMapper, RetraitRepository retraitRepository){
         this.modelMapper = modelMapper;
         this.retraitRepository = retraitRepository;
+    }
+
+    @Override
+    public List<RetraitDTO> consulterRetraits() {
+        return retraitRepository.findAll().stream()
+                .map(retrait -> modelMapper.mapToDto(retrait)).collect(Collectors.toList() );
     }
 
     @Override
