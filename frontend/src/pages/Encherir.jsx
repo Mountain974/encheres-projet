@@ -1,9 +1,26 @@
 import React, {useState} from "react";
-
+import {useParams} from "react-router-dom";
 import {Enchere} from "../fragments/Enchere.jsx";
+import {useQuery} from "@tanstack/react-query";
+
 
 export const Encherir = () => {
-    const [enchere, setEnchere] =useState([])
+    const {noArticle} = useParams()
+
+    const article = useQuery({
+        queryKey:["article"],
+        queryFn: () => fetch(`/api/articles/${noArticle}`)
+            .then(response => response.json())
+
+    })
+
+    if (article.isPending || article.isLoading) {
+        return <div>loading</div>
+    }
+    if (article.error) {
+        return <div>error</div>
+    }
+
     return (
         <>
             <div className="container-fluid">
@@ -15,7 +32,7 @@ export const Encherir = () => {
             </div>
 
             <div className="container mt-5">
-            <Enchere isEncherir enchere={enchere}/>
+            <Enchere isEncherir article={article.data}/>
             </div>
         </>
     )

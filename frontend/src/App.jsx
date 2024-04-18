@@ -65,7 +65,7 @@ export const App = () => {
                     element={<Layout title="Enchere non commencée" header={<Header isConnected={isConnected} />} main={<EncheresNonCommencees />} />}
                 />
                 <Route
-                    path="/encherir"
+                    path="/encherir/:noArticle"
                     element={<Layout title="encherir" header={<Header isConnected={isConnected} />} main={<Encherir />} />}
                 />
                 <Route

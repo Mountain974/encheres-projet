@@ -10,12 +10,17 @@ export const Profil = () => {
     console.log(pseudo)
 
     useEffect(() => {
-        fetch(`./api/utilisateurs/${pseudo}`)
-            .then(response => response.json())
-            .then(data => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`/api/utilisateurs/${pseudo}`);
+                const data = await response.json();
                 setUtilisateur(data);
-            })
-            .catch(error => console.error('Erreur lors de la récupération des données d\'utilisateur :', error));
+            } catch (error) {
+                console.error('Erreur lors de la récupération des données d\'utilisateur :', error);
+            }
+        };
+
+        fetchData();
     }, [pseudo]);
 
     console.log(utilisateur)

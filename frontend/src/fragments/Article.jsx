@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 export const Article = ({vendeur, article, isExist}) => {
     const categorie = useQuery({
         queryKey:["categories"],
-        queryFn: () => fetch("./api/categories")
+        queryFn: () => fetch("/api/categories")
             .then(response => response.json())
     })
 
