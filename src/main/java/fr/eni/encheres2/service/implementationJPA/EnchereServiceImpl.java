@@ -1,6 +1,7 @@
 package fr.eni.encheres2.service.implementationJPA;
 
 import fr.eni.encheres2.dto.EnchereDTO;
+import fr.eni.encheres2.entity.Article;
 import fr.eni.encheres2.entity.Enchere;
 import fr.eni.encheres2.exception.EnchereNotFoundException;
 import fr.eni.encheres2.mapping.EnchereMapper;
@@ -11,7 +12,9 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,6 +41,21 @@ public class EnchereServiceImpl implements EnchereService {
         Enchere enchere = enchereRepository.findById(id).orElseThrow(() -> { throw new EnchereNotFoundException("L'enchère demandée n'existe pas");});
         return modelMapper.mapToDto(enchere);
     }
+
+
+    @Override
+    public EnchereDTO consulterMeilleurEncherePourUnArticle(Long noArticle) {
+        Optional<Enchere> meilleureEnchere = enchereRepository.findAll().stream()
+                .filter(enchere -> enchere.getArticle().getNoArticle().equals(noArticle))
+                .max(Comparator.comparing(Enchere::getMontantEnchere));
+
+        if (meilleureEnchere.isEmpty()) {
+            throw new EnchereNotFoundException("Aucune enchère sur cet article");
+        }
+
+        return modelMapper.mapToDto(meilleureEnchere.get());
+    }
+
 
     @Override
     public EnchereDTO creerEnchere(@Valid @NotNull EnchereDTO enchere) {

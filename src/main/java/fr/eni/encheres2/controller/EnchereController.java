@@ -34,6 +34,16 @@ public class EnchereController {
         }
     }
 
+    @GetMapping("/enchere/{noArticle}")
+    public ResponseEntity<EnchereDTO> afficherMeilleureEncherePourUnArticle(@PathVariable @NotNull Long noArticle) {
+        EnchereDTO enchereDto = enchereService.consulterMeilleurEncherePourUnArticle(noArticle);
+        if (enchereDto != null) {
+            return ResponseEntity.ok(enchereDto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping("/creer")
     public ResponseEntity<Void> ajouterEnchere(@RequestBody @Valid EnchereDTO enchereDTO) {
         enchereService.creerEnchere(enchereDTO);

@@ -1,7 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {useQuery} from "@tanstack/react-query";
+import {useParams} from "react-router-dom";
 
 export const Enchere = ({isEncherir, isDetailMaVente, isAcquerir, article, retrait}) => {
+    const {noArticle} = useParams()
+    const meilleureEnchere = useQuery({
+        queryKey:["enchere"],
+        queryFn: () => fetch(`/api/encheres/enchere/${noArticle}`)
+            .then(response => response.json())
+
+    })
+    console.log(meilleureEnchere.data)
+
+    if (meilleureEnchere.isPending || meilleureEnchere.isLoading) {
+        return <div>loading</div>
+    }
 
 return (
 
@@ -46,8 +60,7 @@ return (
                             <label className="fs-5">Meilleure offre :</label>
                         </div>
                         <div className="col-8">
-                            <p style={{display: "inline"}} className="fs-5">montant enchere</p><p style={{display: "inline"}} className="fs-5">pts</p>
-                            <p style={{display: "inline"}} className="fs-5"> par </p><p style={{display: "inline"}} className="fs-5">acheteur.pseudo</p>
+                            <p style={{display: "inline"}} className="fs-5">{`${meilleureEnchere.data.montantEnchere} pts par ${meilleureEnchere.data.utilisateur.pseudo}`}</p>
                         </div>
                     </div>
 
