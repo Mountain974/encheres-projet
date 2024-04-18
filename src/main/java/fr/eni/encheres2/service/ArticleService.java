@@ -10,7 +10,7 @@ public interface ArticleService {
 
     ArticleDTO consulterArticleVenduParNo(Long noArticle);
 
-    void creerArticleVendu(ArticleDTO articleDTO);
+    ArticleDTO creerArticleVendu(ArticleDTO articleDTO);
 
     void modifierArticleVendu(ArticleDTO articleDTO);
 

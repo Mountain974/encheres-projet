@@ -1,15 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {useQuery} from "@tanstack/react-query";
+import {Form, format, type, constraints} from "@maif/react-forms"
 import PropTypes from "prop-types";
+import '@maif/react-forms/lib/index.css'
+import {useNavigate} from "react-router-dom";
 
 
 export const Article = ({vendeur, article, isExist}) => {
-    const categorie = useQuery({
-        queryKey:["categories"],
-        queryFn: () => fetch("/api/categories")
-            .then(response => response.json())
-    })
-
 
     const articleDefault = {
         nom: "",
@@ -17,24 +14,8 @@ export const Article = ({vendeur, article, isExist}) => {
         dateDebutEnchere: "",
         dateFinEnchere: "",
         miseAPrix: "",
-        vendeur: {
-            noUtilisateur: 16,
-            pseudo: "pseudo_test",
-            nom: "Test",
-            prenom: "Pseudo",
-            email: "pseudo.test@example.com",
-            telephone: "6547890124",
-            rue: "Place de la Concorda",
-            codePostal: "75008",
-            ville: "Paris",
-            motDePasse: "{bcrypt}$2a$10$nAgnye5sawyFW6ifrMedPeE9150ddR6DkuqNH1uHByaZ2ZUBoxTlO",
-            credit: 100,
-            administrateur: true
-        },
-        categorie: {
-            noCategorie: "",
-            libelle: "",
-        }
+        vendeur,
+        categorie: undefined
     }
     const retraitDefault = {
         rue: vendeur.rue,
@@ -42,7 +23,17 @@ export const Article = ({vendeur, article, isExist}) => {
         ville: vendeur.ville
     }
 
+    const [articleData, setArticleData]= useState(articleDefault)
+    const [retraitData, setRetraitData]= useState(retraitDefault)
 
+    const navigate = useNavigate()
+
+
+    const categorie = useQuery({
+        queryKey:["categories"],
+        queryFn: () => fetch("/api/categories")
+            .then(response => response.json())
+    })
 
     if (categorie.isPending || categorie.isLoading) {
         return <div>loading</div>
@@ -51,58 +42,122 @@ export const Article = ({vendeur, article, isExist}) => {
         return <div>error</div>
     }
 
-    const [articleData, setArticleData]= useState(articleDefault)
-    const [retraitData, setRetraitData]= useState(retraitDefault)
 
-    const handleChangeArticle = (event) => {
-        const { name, value } = event.target
-        setArticleData(() => ({..., [name]: value}))
-    }
-    const handleChangeCategorie = (event) => {
-        const { name, value } = event.target
-        setArticleData(() => ({..., categorie: {..., [name]: value}}))
-    }
-    const handleChangeRetrait = (event) => {
-        const { name, value } = event.target
-        setRetraitData(() => ({..., [name]: value}))
-    }
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        fetch("api/articles", {
+    const handleSubmit = (data) => {
+        fetch("/api/articles", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(articleData)
+            //body: JSON.stringify({...data, noArticle: Math.floor(Math.random()*10000)})
+            body: JSON.stringify(data)
         })
-        .then((response) => {
-            if (!response.ok) { throw new Error("Erreur lors de la création de l'article");}
-
-            setArticleData(articleDefault)
-            alert("Article créé avec succès !")
-        })
-            .catch((error) => {
-                console.error("Erreur:", error);
-                alert("Erreur lors de la création de l'article");
-            });
-        fetch("api/retraits", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(retraitData)
-        })
-            .then((response) => {
-                if (!response.ok) { throw new Error("Erreur lors de la création du retrait");}
-
-                setRetraitData(retraitDefault)
-                alert("Article créé avec succès !")
+            .then((response) => response.json())
+        .then((articleCree) =>
+            fetch("/api/retraits", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({...retraitData, noArticle: article.noArticle})
             })
-            .catch((error) => {
-                console.error("Erreur:", error);
-                alert("Erreur lors de la création du retrait");
-            });
+        )
+        .then(() => navigate("/"))
+        .catch((error) => {
+            console.error("Erreur:", error);
+            alert("Erreur lors de la création de l'article");
+        });
+
     }
 
+const schema = {
+        nom: {
+            type: type.string,
+            label: "Article",
+            placeholder: "nom de l'article",
+            constraints: [
+                constraints.required("nom de l'article requis")
+            ],
+            props: {autoFocus: true},
+        },
+        description: {
+            type: type.string,
+            format: format.text,
+            label: "Description",
+            placeholder: "description de l'article",
+            constraints: [
+                constraints.required("description requise")
+            ]
+        },
+        categorie: {
+                type: type.object,
+                format: format.select,
+                options: categorie.data,
+                transformer: (value) => ({label: value.libelle, value}),
+                label: "Catégorie",
+                placeholder: "choisir un catégorie",
+                constraints: [
+                    constraints.required("catégorie requiss")
+                ]
+        },
+        miseAPrix: {
+            type: type.number,
+            label: "Mise à Prix",
+            constraints: [
+                constraints.min(0)
+            ],
+            defaultValue: 0,
+            props: {min: 0},
+        },
+        dateDebutEncheres: {
+            type: type.date,
+            label: "Date de début de l'enchère",
+            constraints: [
+                constraints.required("date de début requise")
+            ]
+        },
+        dateFinEncheres: {
+            type: type.date,
+            label: "Date de fin de l'enchère",
+            constraints: [
+                constraints.required("date de fin requise")
+            ]
+        },
+        retrait: {
+            type: type.object,
+            format: format.form,
+            label: "Retrait",
+            schema: {
+                rue: {
+                    type: type.string,
+                    label: "Rue",
+                    constraints: [
+                        constraints.required("rue de retrait requise")
+                    ]
+                },
+                codePostal: {
+                    type: type.string,
+                    label: "Code postal",
+                    constraints: [
+                        constraints.required("code postal de reatrait requis"),
+                        constraints.min(5),
+                    ]
+                },
+                ville: {
+                    type: type.string,
+                    label: "Ville",
+                    constraints: [
+                        constraints.required("ville de retrait requise")
+                    ]
+                },
+            }
+        }
+}
     return (
         <div className="container mt-5">
-        <form className="d-none d-md-block" onSubmit={handleSubmit}>
+            <Form
+                schema={schema}
+                onSubmit={handleSubmit}
+                value={{... articleData, retrait: retraitData}}
+                options={{actions: {submit: {label: "Valider"}, cancel: {label: "Annuler", display: true}}}}>
+            </Form>
+        {/*<form className="d-none d-md-block" onSubmit={handleSubmit}>
             <div className="row mx-auto mb-4">
 
                 <div className="col-5 mb-3 d-flex justify-content-center">
@@ -118,7 +173,7 @@ export const Article = ({vendeur, article, isExist}) => {
                             </div>
                             <div className="col-8">
                                 <input id="article" type="text" className="form-control fs-5" name="article" required autoComplete="nom"
-                                       value={article.nom} autofocus onChange={handleChangeArticle} />
+                                       value={article.nom} autoFocus onChange={handleChangeArticle} />
                             </div>
                         </div>
 
@@ -237,7 +292,7 @@ export const Article = ({vendeur, article, isExist}) => {
                     </div>
                 </div>
             </div>
-        </form>
+        </form>*/}
         </div>
     )
 }

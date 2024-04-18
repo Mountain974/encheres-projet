@@ -42,8 +42,9 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void creerArticleVendu(@Valid @NotNull ArticleDTO articleDTO) {
-        modelMapper.mapToDto(articleRepository.save(modelMapper.mapToEntity(articleDTO)));
+    public ArticleDTO creerArticleVendu(@Valid @NotNull ArticleDTO articleDTO) {
+        System.out.println(articleDTO);
+        return modelMapper.mapToDto(articleRepository.save(modelMapper.mapToEntity(articleDTO)));
     }
 
     @Override

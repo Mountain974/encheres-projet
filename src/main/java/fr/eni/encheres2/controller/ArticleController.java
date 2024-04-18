@@ -33,9 +33,9 @@ public class ArticleController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> ajouterUnArticle(@RequestBody ArticleDTO articleDTO) {
-        articleService.creerArticleVendu(articleDTO);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ArticleDTO> ajouterUnArticle(@RequestBody ArticleDTO articleDTO) {
+        ArticleDTO article = articleService.creerArticleVendu(articleDTO);
+        return ResponseEntity.ok(article);
     }
 
     @PutMapping("/{noArticle}")
