@@ -18,7 +18,21 @@ export const Encherir = () => {
         return <div>loading</div>
     }
     if (article.error) {
-        return <div>error</div>
+        return <div>erreur : l'article n'existe pas</div>
+    }
+
+    const retrait = useQuery({
+        queryKey:["retrait"],
+        queryFn: () => fetch(`/api/retraits/${noArticle}`)
+            .then(response => response.json())
+
+    })
+
+    if (retrait.isPending || retrait.isLoading) {
+        return <div>loading</div>
+    }
+    if (retrait.error) {
+        return <div>erreur : l'article n'a pas d'adresse</div>
     }
 
     return (
@@ -32,7 +46,7 @@ export const Encherir = () => {
             </div>
 
             <div className="container mt-5">
-            <Enchere isEncherir article={article.data}/>
+            <Enchere isEncherir article={article.data} retrait={retrait.data}/>
             </div>
         </>
     )

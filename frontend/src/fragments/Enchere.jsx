@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const Enchere = ({isEncherir, isDetailMaVente, isAcquerir, article}) => {
+export const Enchere = ({isEncherir, isDetailMaVente, isAcquerir, article, retrait}) => {
 
 return (
 
@@ -77,9 +77,9 @@ return (
                             <label className="fs-5">Retrait :</label>
                         </div>
                         <div className="col-8">
-                            <p className="fs-5">article.retrait.rue</p>
-                            <p className="fs-5">article.retrait.codePostal</p>
-                            <p className="fs-5">article.retrait.ville</p>
+                            <p className="fs-5">{retrait.rue}</p>
+                            <p className="fs-5">{retrait.codePostal}</p>
+                            <p className="fs-5">{retrait.ville}</p>
                         </div>
                     </div>
 

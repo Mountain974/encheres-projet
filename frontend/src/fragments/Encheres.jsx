@@ -136,7 +136,7 @@ export const Encheres = ({articles, retraits, isConnected}) => {
                     </div>
                 </form>
                 <div className="row mx-auto d-flex justify-content-between">
-                    {articles.map((article, index) => <UnArticle article={article} retrait={trouverRetrait(article.noArticle)} index={index}/>)}
+                    {articles.map((article, index) => <UnArticle key={`articleAEncherir-${index}`} article={article} retrait={trouverRetrait(article.noArticle)} isConnected/>)}
                 </div>
             </div>
         </>
