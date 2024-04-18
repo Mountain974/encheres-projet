@@ -15,9 +15,6 @@ import {DetailVente} from "./pages/DetailVente.jsx"
 import MesVentes from "./pages/MesVentes.jsx";
 import './App.css'
 
-
-
-
 export const App = () => {
     //déterminé si l'utilisateur est connecté
     const isConnected = true
