@@ -1,4 +1,6 @@
 import React from "react";
+import {Link} from "react-router-dom";
+
 export const Header = ({isConnected}) => {
     return (
         <div id="header3" >
@@ -6,7 +8,7 @@ export const Header = ({isConnected}) => {
 
 
                 <div className="col-12 col-md-4">
-                    <a href="/" className="logo fs-4">ENI-Encheres</a>
+                    <Link to={"/"}>ENI-Encheres</Link>
                 </div>
 
 
@@ -16,33 +18,33 @@ export const Header = ({isConnected}) => {
                 {isConnected ?
                     <>
                         <div className="text-lg-center text-left px-4">
-                            <a className="fs-5" href="/">Enchères</a>
+                            <Link to={"/"}>Enchères</Link>
                         </div>
 
 
                         <div className="text-lg-center text-left px-4">
-                            <a className="fs-5" href="/vendre-un-article">Vendre un article</a>
+                            <Link to={"/vendre-un-article"}>Vendre un article</Link>
                         </div>
 
 
                         <div className="text-lg-center text-left px-4">
-                            <a className="fs-5" href="/mon-profil">Mon profil</a>
+                            <Link to={"/mon-profil"}>Mon profil</Link>
                         </div>
 
 
                         <div className="text-lg-center text-left px-4">
-                            <a className="fs-5" style={{whiteSpace: "nowrap"}} href="/">Déconnexion</a>
+                            <Link to={"/"}>Déconnexion</Link>
                         </div>
                     </>
                 :
                     <>
                         <div className="d-flex align-items-center col-md-3 ms-4">
-                            <a className="text-center fs-5" href="/creer-compte">S'inscrire</a>
+                            <Link to={"/creer-compte"}>S'inscrire</Link>
                         </div>
 
 
                         <div className="d-flex align-items-center col-md-3 ms-4">
-                            <a className="text-center fs-5" style={{whiteSpace: "nowrap"}} href="/connection">Se connecter</a>
+                            <Link to={"/connection"}>Se connecter</Link>
                         </div>
                     </>
                 }
