@@ -14,11 +14,12 @@ public interface UtilisateurService {
 
     UtilisateurDTO trouverUtilisateurParEmail(String email);
 
+    UtilisateurDTO trouverUtilisateurParPseudo(String email);
+
     void modifierUtilisateur(UtilisateurDTO utilisateurDTO);
 
     void supprimerUtilisateur(long id);
 
     List<UtilisateurDTO> tousLesUtilisateurs();
-
 
 }

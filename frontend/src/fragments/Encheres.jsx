@@ -144,7 +144,7 @@ export const Encheres = ({articles, retraits, isConnected}) => {
     )
 }
 
-Encheres.PropTypes= ({
+Encheres.propTypes= ({
     articles: PropTypes.shape({}),
     isConnected: PropTypes.bool
 })

@@ -155,7 +155,7 @@ export const Article = ({vendeur, article, isExist}) => {
     )
 }
 
-Article.PropTypes = ({
+Article.propTypes = ({
     vendeur: PropTypes.shape({
         rue: PropTypes.string,
         codePostal: PropTypes.string,

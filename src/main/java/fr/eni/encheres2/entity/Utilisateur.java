@@ -1,5 +1,6 @@
 package fr.eni.encheres2.entity;
 
+import fr.eni.encheres2.utils.AppConstants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
@@ -9,13 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.io.Serial;
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Data
@@ -23,10 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Utilisateur implements UserDetails {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class Utilisateur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,43 +63,21 @@ public class Utilisateur implements UserDetails {
     private long credit;
     @NotNull(message = "Le statut administrateur est obligatoire")
     private boolean administrateur;
+    @Transient
+    private transient String roles;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (isAdministrateur()) {
-            return List.of(new SimpleGrantedAuthority("ADMIN"));
-        }
-        return List.of(new SimpleGrantedAuthority("USER"));
+    public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse) {
+        this.pseudo = pseudo;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.telephone = telephone;
+        this.rue = rue;
+        this.codePostal = codePostal;
+        this.ville = ville;
+        this.motDePasse = motDePasse;
+        setCredit(AppConstants.INITIAL_CREDIT);
+        setAdministrateur(false);
+        setRoles("USER");
     }
-
-    @Override
-    public String getPassword() {
-        return motDePasse;
-    }
-
-    @Override
-    public String getUsername() {
-        return pseudo;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
 }

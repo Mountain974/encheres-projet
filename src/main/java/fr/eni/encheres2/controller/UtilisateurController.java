@@ -3,9 +3,11 @@ package fr.eni.encheres2.controller;
 import fr.eni.encheres2.dto.ArticleDTO;
 import fr.eni.encheres2.dto.EnchereDTO;
 import fr.eni.encheres2.dto.UtilisateurDTO;
+import fr.eni.encheres2.repository.UtilisateurRepository;
 import fr.eni.encheres2.service.ArticleService;
 import fr.eni.encheres2.service.EnchereService;
 import fr.eni.encheres2.service.implementationJPA.UtilisateurServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +23,17 @@ public class UtilisateurController {
     private final ArticleService articleService;
 
     @Autowired
-    public UtilisateurController(UtilisateurServiceImpl utilisateurService, EnchereService enchereService, ArticleService articleService) {
+    public UtilisateurController(UtilisateurRepository userRepository, UtilisateurServiceImpl utilisateurService, EnchereService enchereService, ArticleService articleService) {
         this.utilisateurService = utilisateurService;
         this.enchereService = enchereService;
         this.articleService = articleService;
     }
+
+    @PostMapping("/register")
+    public void creerUtilisateur(@RequestBody @Valid UtilisateurDTO user) {
+        utilisateurService.creerUtilisateur(user);
+    }
+
 
     @GetMapping
     public List<UtilisateurDTO> afficherTousLesUtilisateurs() {
@@ -42,22 +50,16 @@ public class UtilisateurController {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<Void> creerUtilisateur(@RequestBody UtilisateurDTO userDTO) {
-        utilisateurService.creerUtilisateur(userDTO);
-        return ResponseEntity.ok().build();
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> modifierUtilisateur(@PathVariable Long id, @RequestBody UtilisateurDTO userDTO) {
-        userDTO.setNoUtilisateur(id);
+    @PutMapping("/{noUtilisateur}")
+    public ResponseEntity<Void> modifierUtilisateur(@PathVariable Long noUtilisateur, @RequestBody UtilisateurDTO userDTO) {
+        userDTO.setNoUtilisateur(noUtilisateur);
         utilisateurService.modifierUtilisateur(userDTO);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> supprimerUtilisateur(@PathVariable Long id) {
-        utilisateurService.supprimerUtilisateur(id);
+    @DeleteMapping("/{noUtilisateur}")
+    public ResponseEntity<Void> supprimerUtilisateur(@PathVariable Long noUtilisateur) {
+        utilisateurService.supprimerUtilisateur(noUtilisateur);
         return ResponseEntity.ok().build();
     }
 

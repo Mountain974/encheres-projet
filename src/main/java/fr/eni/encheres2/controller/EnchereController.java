@@ -15,7 +15,7 @@ public class EnchereController {
 
     private EnchereService enchereService;
 
-    public EnchereController(EnchereService enchereService){
+    public EnchereController(EnchereService enchereService) {
         this.enchereService = enchereService;
     }
 
@@ -37,6 +37,6 @@ public class EnchereController {
     @PostMapping("/creer")
     public ResponseEntity<Void> ajouterEnchere(@RequestBody @Valid EnchereDTO enchereDTO) {
         enchereService.creerEnchere(enchereDTO);
-        return  ResponseEntity.ok().build();
+        return ResponseEntity.ok().build();
     }
 }

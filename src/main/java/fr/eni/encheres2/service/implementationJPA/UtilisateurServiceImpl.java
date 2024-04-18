@@ -7,7 +7,6 @@ import fr.eni.encheres2.service.UtilisateurService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -20,16 +19,24 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private final UtilisateurRepository utilisateurRepository;
     private final ModelMapper modelMapper = new ModelMapper();
+    private final PasswordEncoder encoder;
 
     @Autowired
-    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository) {
+    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository, PasswordEncoder encoder) {
         this.utilisateurRepository = utilisateurRepository;
+        this.encoder = encoder;
     }
 
     @Override
     public void creerUtilisateur(UtilisateurDTO utilisateurDTO) {
+        if (utilisateurRepository.existsByPseudo(utilisateurDTO.getPseudo())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Un utilisateur avec ce pseudo existe déjà !");
+        }
+
+        if (utilisateurRepository.existsByEmail(utilisateurDTO.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Un utilisateur avec cet email existe déjà !");
+        }
         Utilisateur utilisateur = modelMapper.map(utilisateurDTO, Utilisateur.class);
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         utilisateur.setMotDePasse(encoder.encode(utilisateur.getMotDePasse()));
         utilisateurRepository.save(utilisateur);
     }
@@ -43,9 +50,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public UtilisateurDTO trouverUtilisateurParEmail(String email) {
-        Utilisateur utilisateur = utilisateurRepository.findByEmail(email)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "L'utilisateur n'existe pas."));
+        Utilisateur utilisateur = utilisateurRepository.findByEmail(email);
+        return modelMapper.map(utilisateur, UtilisateurDTO.class);
+    }
 
+    @Override
+    public UtilisateurDTO trouverUtilisateurParPseudo(String pseudo) {
+        Utilisateur utilisateur = utilisateurRepository.findByPseudo(pseudo);
         return modelMapper.map(utilisateur, UtilisateurDTO.class);
     }
 
@@ -75,5 +86,4 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 .map(utilisateur -> modelMapper.map(utilisateur, UtilisateurDTO.class))
                 .collect(Collectors.toList());
     }
-
 }
