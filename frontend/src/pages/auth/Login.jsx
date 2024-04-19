@@ -7,7 +7,6 @@ export const Login = () => {
   const navigateTo = useNavigate();
 
   const handleLogin = async ({ username, password }) => {
-    console.log("je suis dans handle login");
     try {
       const response = await fetch("/api/login", {
         method: "POST",

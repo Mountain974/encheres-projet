@@ -14,7 +14,7 @@ export const Header = ({ isConnected }) => {
           {isConnected ? (
             <>
               <div className="text-lg-center text-left px-4">
-                <a className="fs-5" href="/home">
+                <a className="fs-5" href="/">
                   Enchères
                 </a>
               </div>

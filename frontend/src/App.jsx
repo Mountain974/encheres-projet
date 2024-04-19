@@ -17,7 +17,7 @@ import "./App.css";
 
 export const App = () => {
   //déterminé si l'utilisateur est connecté
-  const isConnected = false;
+  const isConnected = true;
 
   return (
     <BrowserRouter>
